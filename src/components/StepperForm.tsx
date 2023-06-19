@@ -15,6 +15,14 @@ import {
   Select,
 } from "@mui/material";
 
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import * as Yup from "yup";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { style } from "../Style/Form";
 
 import Card from "./Card";
@@ -24,6 +32,14 @@ import Card from "./Card";
 //   lastName: string;
 //   email: string;
 // };
+
+const schema = Yup.object().shape({
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+  city: Yup.string().required(),
+  dateOfBirth: Yup.date().required(),
+});
+
 interface Option {
   value: string;
   label: string;
@@ -47,6 +63,14 @@ function App() {
   const [image, setImage] = useState();
 
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
@@ -73,15 +97,19 @@ function App() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleFinish = () => {
-    alert(
-      `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${selectedOption}`
-    );
+  const handleFinish = (e: any) => {
+    console.log(e);
+
+    dispatch({ type: "SUBMIT_FORM", e });
+
+    // alert(
+    //   `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${selectedOption}`
+    // );
   };
   return (
     <Container>
       <Box sx={style.steperWrapper} dir="rtl">
-        <Stepper activeStep={activeStep} sx={{ border: "3px solid red" }}>
+        <Stepper activeStep={activeStep}>
           <Step>
             <StepLabel sx={style.StepLabel}>مرحله 1</StepLabel>
           </Step>
@@ -99,12 +127,17 @@ function App() {
                 <Typography align="center" sx={style.stepStyle}>
                   مرحله اول
                 </Typography>
-                <Box sx={{ py: "1.5rem" }}>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit(handleFinish)}
+                  sx={{ py: "1.5rem" }}
+                >
                   <FormControl fullWidth>
                     <FormLabel sx={style.FormLabelStyle}>نام</FormLabel>
                     <TextField
                       onChange={(e) => setFirstName(e.target.value)}
                       required
+                      name="firstName"
                       variant="outlined"
                       color="secondary"
                       type="text"
@@ -121,6 +154,7 @@ function App() {
                     <TextField
                       onChange={(e) => setLastName(e.target.value)}
                       required
+                      name="lastName"
                       variant="outlined"
                       color="secondary"
                       type="txt"
@@ -136,6 +170,8 @@ function App() {
                     </FormLabel>
                     <Box>
                       <Select
+                        name="city"
+                        fullWidth
                         value={selectedOption?.value || ""}
                         onChange={handleChange as any}
                       >
@@ -152,6 +188,7 @@ function App() {
                   <FormControl fullWidth sx={{ mt: "0.5rem" }}>
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
                     <TextField
+                      name="dateOfBirth"
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
@@ -163,6 +200,7 @@ function App() {
                   <Button
                     variant="contained"
                     sx={style.nextButton}
+                    type="submit"
                     onClick={handleNext}
                   >
                     بعدی
@@ -175,7 +213,11 @@ function App() {
         {activeStep === 1 && (
           <Box>
             <Container>
-              <Box sx={style.formWrapper}>
+              <Box
+                component="form"
+                onSubmit={handleSubmit(handleFinish)}
+                sx={style.formWrapper}
+              >
                 <Typography align="center" sx={style.stepStyle}>
                   مرحله دوم
                 </Typography>
@@ -193,6 +235,7 @@ function App() {
                   <Button
                     variant="contained"
                     sx={style.nextButton}
+                    type="submit"
                     onClick={handleNext}
                   >
                     بعدی
@@ -227,6 +270,7 @@ function App() {
                   <Button
                     variant="contained"
                     sx={style.nextButton}
+                    type="submit"
                     onClick={handleFinish}
                   >
                     ثبت نهایی

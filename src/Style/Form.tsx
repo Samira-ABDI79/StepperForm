@@ -40,7 +40,6 @@ const inputStyle = {
 };
 const steperWrapper = {
   minHeight: "40rem",
-  width: "80%",
 
   padding: "0 auto",
   display: "flex",
