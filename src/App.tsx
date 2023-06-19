@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import StepperForm from "./components/StepperForm";
 
-import Formman from "./pages/Form";
+
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<StepperForm />} />
-          <Route path="/s" element={<Formman />} />
+         
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

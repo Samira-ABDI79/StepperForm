@@ -35,7 +35,7 @@ import Card from "./Card";
 type FormData = {
   firstName: string;
   lastName: string;
-  // city: string;
+  city: string;
   // date:string;
 };
 
@@ -44,14 +44,14 @@ const schema = yup.object().shape({
   lastName: yup.string().required('نام خانوادگی را وارد کنید'),
   // date: yup.string().required('تاریخ تولد را وارد کنید'),
 
-  // city: yup.string().required('شهر خود را انتخاب کنید'),
+  city: yup.string().required('شهر خود را انتخاب کنید'),
 });
 
 interface Option {
   value: string;
   label: string;
 }
-const options: Option[] = [
+const ostan = [
   { value: "تهران", label: "تهران" },
   { value: "البرز", label: "البرز" },
   { value: "مشهد", label: "مشهد" },
@@ -65,6 +65,7 @@ function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [city,setCity]=useState("")
   const [data, setData] = useState<FormData[]>([]);
   // const [date, setDate] = useState("");
   const [image, setImage] = useState();
@@ -95,12 +96,7 @@ function App() {
     reader.readAsDataURL(file);
   }
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>): any => {
-    const value = event.target.value as string;
-    const option = options.find((o) => o.value === value);
-    setSelectedOption(() => option || null);
-    return;
-  };
+ 
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -127,6 +123,7 @@ function App() {
     console.log(formData)
     setFirstName(formData.firstName)
     setLastName(formData.lastName)
+    setCity(formData.city)
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -194,19 +191,21 @@ function App() {
                       استان محل سکونت{" "}
                     </FormLabel>
                     <Box>
-                      <Select
-                        name="city"
-                        fullWidth
-                        value={selectedOption?.value || ""}
-                        onChange={handleChange as any}
-                      >
-                        <MenuItem value="">شهر خود را انتخاب کنید</MenuItem>
-                        {options.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </Select>
+                    <FormControl variant="outlined" fullWidth error={Boolean(errors.city)}>
+         
+            <Select
+              labelId="select-label"
+              label="انتخاب کنید"
+              {...register('city')}
+            >
+                 {ostan.map((item, index) => (
+       <MenuItem value={item.value}>{item.label}</MenuItem>
+      ))}
+             
+            </Select>
+            {errors.city && <p>{errors.city.message}</p>}
+          </FormControl>
+                     
                     </Box>
                   </FormControl>
 
@@ -292,7 +291,8 @@ function App() {
                   مرحله دوم
                 </Typography>
                 <Card
-                  cityName={selectedOption?.label}
+                  // cityName={selectedOption?.label}
+                  cityName={city}
                   image={image}
                   name={firstName + " " + lastName}
                   
