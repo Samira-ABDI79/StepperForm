@@ -146,11 +146,6 @@ function App() {
                           </MenuItem>
                         ))}
                       </Select>
-                      {selectedOption && (
-                        <div>
-                          <p>{selectedOption.label}</p>
-                        </div>
-                      )}
                     </Box>
                   </FormControl>
 
