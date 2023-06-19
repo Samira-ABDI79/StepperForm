@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import {
   Stepper,
   Step,
@@ -14,7 +15,11 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-
+import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import useTheme from '@mui/system/useTheme';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -71,7 +76,10 @@ function App() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const handleDateChange = (tarikh:any) => {
+    setDate(tarikh);
+    console.log(tarikh)
+  };
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -102,9 +110,11 @@ function App() {
 
     dispatch({ type: "SUBMIT_FORM", e });
 
-    // alert(
-    //   `First Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${selectedOption}`
-    // );
+    const existingTheme = useTheme();
+    const theme = React.useMemo(
+      () => createTheme({ direction: 'rtl' }, existingTheme),
+      [existingTheme],
+    );
   };
   return (
     <Container>
@@ -187,13 +197,14 @@ function App() {
 
                   <FormControl fullWidth sx={{ mt: "0.5rem" }}>
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
-                    <TextField
-                      name="dateOfBirth"
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                      fullWidth
-                    ></TextField>
+                   
+      <div dir="rtl">
+        <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+          <DateTimePicker label="Date Picker" defaultValue={new Date(2022, 1, 1)}     value={date}
+        onChange={handleDateChange} />
+        </LocalizationProvider>
+      </div>
+  
                   </FormControl>
                 </Box>
                 <Box sx={style.buttonBox}>
