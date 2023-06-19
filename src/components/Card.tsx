@@ -12,23 +12,35 @@ export default function Card({ image, name, cityName, date }: inputs) {
   return (
     <>
       <Typography>اطلاعات خود را مرور کنید:</Typography>
-      <Box id="card" sx={{ maxWidth: "60%", margin: "auto" }}>
+      <Box id="card" sx={{ maxWidth: "60%", margin: "1rem auto" }}>
         {image ? (
-          <img
+          <div className="flip-card">
+          <div className="flip-card-inner">
+            <div className="flip-card-front">
+             
+              <img
             style={{
-              border: "1px solid black",
-              marginTop: "2rem",
-              width: "100%",
-              aspectRatio: "2/1",
+              width: "300px",
+              height:"300px",
+            
             }}
             src={image}
             title="user"
           />
+            </div>
+            <div className="flip-card-back">
+            
+              <p>موفق باشی</p>
+        
+            </div>
+          </div>
+        </div>
+          
         ) : (
           <div>no image</div>
         )}
-        <CardContent>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <CardContent sx={{mt:"1rem"}}>
+          <Stack direction="row" justifyContent="start" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"
@@ -41,7 +53,7 @@ export default function Card({ image, name, cityName, date }: inputs) {
               {name}
             </Typography>
           </Stack>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Stack direction="row" justifyContent="start" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"
@@ -54,7 +66,7 @@ export default function Card({ image, name, cityName, date }: inputs) {
               {cityName}
             </Typography>
           </Stack>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Stack direction="row" justifyContent="start" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"

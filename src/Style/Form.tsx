@@ -3,7 +3,7 @@ const labelText = {
   paddingLeft: "2rem",
   width: "8rem",
   direction: "rtl",
-  border:"1px solid red"
+ 
 };
 const FormLabelStyle = {
   color: "#696969",
@@ -13,11 +13,13 @@ const FormLabelStyle = {
 };
 const formWrapper = {
   width: {lg:"30rem",sm:"80%"},
-height:"40rem",
+minHeight:"35rem",
+height:"44rem",
+
   borderRadius: "15px",
   padding: "2rem 2.5rem",
   mt: "2rem",
-  minHeight: "20rem",
+ 
   backgroundColor: "#fff",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
 };
@@ -56,7 +58,7 @@ const buttonBox = {
   mt: "1rem",
 };
 const nextButton = {
-  // background: " #07ba9b",
+
   backgroundColor: "rgb(0, 132, 168)",
 
   padding: "9px 20px",
@@ -64,9 +66,10 @@ const nextButton = {
   fontSize: "15px",
   color: "#fff",
   width: "8rem",
-
+display:"flex",
+justifyContent:"space-around",
   fontWeight: "300",
-  // color: "rgb(64, 64, 64)",
+
   "&:hover": {
     backgroundColor: "rgb(0, 132, 168)",
   },
@@ -75,7 +78,8 @@ const prevButton = {
   fontSize: " 15px",
 
   fontWeight: "300",
-
+  display:"flex",
+  justifyContent:"space-around",
   background: "#fba60a",
   color: "#fff",
   padding: "9px 20px",
@@ -98,7 +102,7 @@ const stepStyle = {
 };
 const UploadBox = {
   background: "#a0a0a0",
-  width: "12rem",
+  width: "14rem",
   margin: "3rem auto ",
   padding: "9px 20px",
   borderRadius: "15px",

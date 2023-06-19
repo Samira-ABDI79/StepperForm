@@ -19,12 +19,12 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { format } from 'date-fns-jalali';
-import useTheme from '@mui/system/useTheme';
-import { createTheme } from '@mui/material/styles';
+
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,21 +40,21 @@ type FormData = {
   firstName: string;
   lastName: string;
   city: string;
-  // date:string  ;
+  
 };
 
 const schema = yup.object().shape({
   firstName: yup.string().required('نام را وارد کنید'),
   lastName: yup.string().required('نام خانوادگی را وارد کنید'),
   // date: yup.string().required('تاریخ تولد را وارد کنید'),
-
   city: yup.string().required('شهر خود را انتخاب کنید'),
+  // file: yup
+  //   .mixed()
+  //   .required('Please select a file')
+   
 });
 
-interface Option {
-  value: string;
-  label: string;
-}
+
 const ostan = [
   { value: "تهران", label: "تهران" },
   { value: "البرز", label: "البرز" },
@@ -67,6 +67,7 @@ const ostan = [
 
 function App() {
   const [activeStep, setActiveStep] = useState(0);
+  const [fileName, setFileName] = useState('');
  
   
  
@@ -87,9 +88,7 @@ function App() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      // const formattedDate = format(date, 'jYYYY/jMM/jDD');
-      // const dateString: string = date.toLocaleDateString('fa-IR');
-      // setDate(date)
+   
 
     } else {
       setSelectedDate(null);
@@ -100,6 +99,7 @@ function App() {
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
+    setFileName(file.name);
     reader.onload = () => {
       setImage(reader.result as any);
     };
@@ -122,11 +122,8 @@ function App() {
 
     dispatch({ type: "SUBMIT_FORM", e });
 
-    const existingTheme = useTheme();
-    const theme = React.useMemo(
-      () => createTheme({ direction: 'rtl' }, existingTheme),
-      [existingTheme],
-    );
+    
+   
   };
   const onSubmit = (formData: FormData) => {
  
@@ -140,7 +137,7 @@ function App() {
     <Container  >
       <Box sx={style.steperWrapper} dir="rtl">
         <Stepper activeStep={activeStep}>
-          <Step>
+          <Step >
             <StepLabel sx={style.StepLabel}>مرحله 1</StepLabel>
           </Step>
           <Step>
@@ -155,7 +152,7 @@ function App() {
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>
-                  مرحله اول
+                ثبت نام
                 </Typography>
                 <Box
                   component="form"
@@ -198,8 +195,9 @@ function App() {
          
             <Select
               labelId="select-label"
-              label="انتخاب کنید"
+             
               {...register('city')}
+              defaultValue={city}
             >
                  {ostan.map((item) => (
        <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
@@ -218,26 +216,22 @@ function App() {
       
         <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
           <DateTimePicker 
-          label="Date Picker"
-          // format={formatDate} 
+         
+        
           defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
         </LocalizationProvider>
       
-  
                   </FormControl>
                 </Box>
                 <Box sx={style.buttonBox}>
                   <Button
                     variant="contained"
                     sx={style.nextButton}
-                    type="submit"
-                  
+                    type="submit" >
+                       <ArrowForwardIcon  />
+                   <span> بعدی</span>
                    
-                  >
-                    بعدی
                   </Button>
-        
-
                 </Box>
               </Box>
             </Container>
@@ -252,22 +246,27 @@ function App() {
                 sx={style.formWrapper}
               >
                 <Typography align="center" sx={style.stepStyle}>
-                  مرحله دوم
+                دریافت عکس
                 </Typography>
 
-                <Stack>
-                  <Typography variant="h4" align="center" gutterBottom>
-                    دریافت عکس
-                  </Typography>
+                
+                 
 
-                  <Box sx={style.UploadBox}>
+                  <Stack sx={style.UploadBox} justifyContent="center" alignItems="center" spacing={2} >
+                  <label htmlFor="file-upload" className="custom-file-upload">
+          {fileName || 'یک عکس انتخاب کنید'}
+        </label>
                     <input 
                     accept=".jpeg,.raw,.dng,.tiff,.bmp,.png,.svg,.webp,.gif"
-                    type="file" onChange={handleUploadImage}
+                    type="file"
+                    style={{width:"80%"}}
+                    // {...register('file')}
+                    onChange={handleUploadImage}
+                    
                  
                     />
-                  </Box>
-                </Stack>
+                  </Stack>
+               
                 <Box sx={style.buttonBox}>
                   <Button
                     variant="contained"
@@ -275,15 +274,19 @@ function App() {
                     type="submit"
                     onClick={handleNext}
                   >
-                    بعدی
+                   <ArrowForwardIcon  />
+                   <span> بعدی</span>
+                   
                   </Button>
+                 
 
                   <Button
                     variant="contained"
                     sx={style.prevButton}
                     onClick={handleBack}
                   >
-                    قبلی
+                 <span>   قبلی</span>
+                 <ArrowBackIcon /> 
                   </Button>
                 </Box>
               </Box>
@@ -295,7 +298,7 @@ function App() {
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>
-                  مرحله دوم
+                   ثبت و نمایش
                 </Typography>
                 <Card
                  
@@ -304,7 +307,7 @@ function App() {
                   name={firstName + " " + lastName}
                   
                   date={selectedDate?.toString()}
-                  // date={selectedOption.toLocaleDateString('fa-IR')}
+                
                 />
                 <Box sx={style.buttonBox}>
                   <Button
@@ -320,7 +323,8 @@ function App() {
                     sx={style.prevButton}
                     onClick={handleBack}
                   >
-                    قبلی
+                 <span>   قبلی</span>
+                 <ArrowBackIcon /> 
                   </Button>
                 </Box>
               </Box>
