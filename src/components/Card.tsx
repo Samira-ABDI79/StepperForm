@@ -28,40 +28,40 @@ export default function Card({ image, name, cityName, date }: inputs) {
           <div>no image</div>
         )}
         <CardContent>
-          <Stack direction="row" justifyContent="start" alignItems="center">
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"
               component="label"
               sx={style.labelText}
             >
-              نام ونام خانوادگی
+              نام ونام خانوادگی :
             </Typography>
             <Typography gutterBottom variant="body1" component="p">
               {name}
             </Typography>
           </Stack>
-          <Stack direction="row" justifyContent="start" alignItems="center">
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"
               component="label"
               sx={style.labelText}
             >
-              استان
+              استان :
             </Typography>
             <Typography gutterBottom variant="body1" component="p">
               {cityName}
             </Typography>
           </Stack>
-          <Stack direction="row" justifyContent="start" alignItems="center">
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography
               gutterBottom
               variant="body1"
               component="label"
               sx={style.labelText}
             >
-              تاریخ تولد
+              تاریخ تولد :
             </Typography>
             <Typography gutterBottom variant="body1" component="p">
               {date}

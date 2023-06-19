@@ -146,7 +146,7 @@ function App() {
           </Step>
         </Stepper>
         {activeStep === 0 && (
-          <form style={{ height: "20rem",marginBottom:"2rem" }} onSubmit={handleSubmit(onSubmit)} >
+          <form className="marginBottom" onSubmit={handleSubmit(onSubmit)} >
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>
@@ -196,8 +196,8 @@ function App() {
               label="انتخاب کنید"
               {...register('city')}
             >
-                 {ostan.map((item, index) => (
-       <MenuItem value={item.value}>{item.label}</MenuItem>
+                 {ostan.map((item) => (
+       <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
       ))}
              
             </Select>
@@ -239,7 +239,7 @@ function App() {
           </form>
         )}
         {activeStep === 1 && (
-          <Box>
+          <Box className="marginBottom" >
             <Container>
               <Box
                 component="form"
@@ -256,7 +256,9 @@ function App() {
                   </Typography>
 
                   <Box sx={style.UploadBox}>
-                    <input type="file" onChange={handleUploadImage} />
+                    <input 
+                    accept=".jpeg,.raw,.dng,.tiff,.bmp,.png,.svg,.webp,.gif"
+                    type="file" onChange={handleUploadImage} />
                   </Box>
                 </Stack>
                 <Box sx={style.buttonBox}>
@@ -282,7 +284,7 @@ function App() {
           </Box>
         )}
         {activeStep === 2 && (
-          <Box>
+          <Box className="marginBottom"  >
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>

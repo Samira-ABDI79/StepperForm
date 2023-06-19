@@ -12,3 +12,7 @@ body {
   font-family: 'CustomFont', Arial, sans-serif;
 }
 
+
+.marginBottom{
+  margin-bottom: 2rem;
+}

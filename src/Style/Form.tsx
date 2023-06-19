@@ -1,8 +1,9 @@
 const labelText = {
   color: "gray",
   paddingLeft: "2rem",
-  width: "6rem",
+  width: "8rem",
   direction: "rtl",
+  border:"1px solid red"
 };
 const FormLabelStyle = {
   color: "#696969",
@@ -11,8 +12,8 @@ const FormLabelStyle = {
   mb: "0.3rem",
 };
 const formWrapper = {
-  width: "30rem",
-
+  width: {lg:"30rem",sm:"80%"},
+height:"40rem",
   borderRadius: "15px",
   padding: "2rem 2.5rem",
   mt: "2rem",
@@ -39,13 +40,14 @@ const inputStyle = {
   marginTop: "10px",
 };
 const steperWrapper = {
-  minHeight: "40rem",
-
+ 
+mt:"3rem",
   padding: "0 auto",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+ 
 };
 const buttonBox = {
   display: "flex",
@@ -59,20 +61,20 @@ const nextButton = {
 
   padding: "9px 20px",
   borderRadius: "15px",
-  fontSize: "20px",
+  fontSize: "15px",
   color: "#fff",
   width: "8rem",
 
-  fontWeight: "500",
+  fontWeight: "300",
   // color: "rgb(64, 64, 64)",
   "&:hover": {
     backgroundColor: "rgb(0, 132, 168)",
   },
 };
 const prevButton = {
-  fontSize: " 20px",
+  fontSize: " 15px",
 
-  fontWeight: "700",
+  fontWeight: "300",
 
   background: "#fba60a",
   color: "#fff",
@@ -95,13 +97,13 @@ const stepStyle = {
   color: "rgb(64, 64, 64)",
 };
 const UploadBox = {
-  background: "gray",
-  width: "80%",
-  margin: "auto",
+  background: "#a0a0a0",
+  width: "12rem",
+  margin: "3rem auto ",
   padding: "9px 20px",
   borderRadius: "15px",
   border: "1px dashed black",
-  height: "5rem",
+  height: "8rem",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
