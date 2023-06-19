@@ -195,22 +195,23 @@ function App() {
          
             <Select
               labelId="select-label"
+            
              
               {...register('city')}
-              defaultValue={city}
+              // defaultValue={city}
             >
                  {ostan.map((item) => (
        <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
       ))}
              
             </Select>
-            {errors.city && <p>{errors.city.message}</p>}
+            {errors.city && <p className="error-text" >{errors.city.message}</p>}
           </FormControl>
                      
                     </Box>
                   </FormControl>
 
-                  <FormControl fullWidth sx={{ mt: "0.5rem" }} dir="rtl"  >
+                  <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl"  >
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
                    
       

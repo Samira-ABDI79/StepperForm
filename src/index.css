@@ -84,3 +84,16 @@ body {
  justify-content: center;
  align-items: center;
 }
+.error-text{
+  color:red;
+  font-size: 16px;
+  float: left;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  text-align: left;
+  margin-top: 3px;
+  margin-right: 14px;
+  margin-bottom: 0;
+  margin-left: 14px;
+}
