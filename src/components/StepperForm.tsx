@@ -36,7 +36,7 @@ type FormData = {
   firstName: string;
   lastName: string;
   city: string;
-  // date:string;
+  // date:string  ;
 };
 
 const schema = yup.object().shape({
@@ -79,8 +79,10 @@ function App() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      const formattedDate = format(date, 'jYYYY/jMM/jDD');
-      // setSelectedDate(formattedDate);
+      // const formattedDate = format(date, 'jYYYY/jMM/jDD');
+      // const dateString: string = date.toLocaleDateString('fa-IR');
+      setDate(date)
+
     } else {
       setSelectedDate(null);
     }
@@ -120,6 +122,8 @@ function App() {
   };
   const onSubmit = (formData: FormData) => {
     // setData([...data, formData]);
+    // const dateString: string = formData.date.toLocaleDateString('fa-IR');
+    // const formattedDate = new Intl.DateTimeFormat('fa-IR').format(formData.date.toString());
     console.log(formData)
     setFirstName(formData.firstName)
     setLastName(formData.lastName)
@@ -291,12 +295,13 @@ function App() {
                   مرحله دوم
                 </Typography>
                 <Card
-                  // cityName={selectedOption?.label}
+                 
                   cityName={city}
                   image={image}
                   name={firstName + " " + lastName}
                   
-                  date={selectedDate?.toString()}
+                  // date={selectedDate?.toString()}
+                  date={selectedOption.toLocaleDateString('fa-IR')}
                 />
                 <Box sx={style.buttonBox}>
                   <Button
