@@ -19,7 +19,11 @@ import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import useTheme from '@mui/system/useTheme';
+<<<<<<< HEAD
 import { createTheme } from '@mui/material/styles';
+=======
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+>>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -76,6 +80,7 @@ function App() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+<<<<<<< HEAD
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   const handleDateChange = (tarikh: Date | null) => {
@@ -85,6 +90,12 @@ function App() {
   //   setDate(tarikh);
   //   console.log(tarikh)
   // };
+=======
+  const handleDateChange = (tarikh:any) => {
+    setDate(tarikh);
+    console.log(tarikh)
+  };
+>>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -205,7 +216,12 @@ function App() {
                    
       <div dir="rtl">
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+<<<<<<< HEAD
           <DateTimePicker label="Date Picker" defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
+=======
+          <DateTimePicker label="Date Picker" defaultValue={new Date(2022, 1, 1)}     value={date}
+        onChange={handleDateChange} />
+>>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
         </LocalizationProvider>
       </div>
   
