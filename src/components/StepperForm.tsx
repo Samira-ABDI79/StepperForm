@@ -18,17 +18,13 @@ import {
 import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { format } from 'date-fns-jalali';
 import useTheme from '@mui/system/useTheme';
-<<<<<<< HEAD
 import { createTheme } from '@mui/material/styles';
-=======
-import { createTheme, ThemeProvider } from '@mui/material/styles';
->>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
-import { useForm } from "react-hook-form";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import * as Yup from "yup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -36,17 +32,19 @@ import { style } from "../Style/Form";
 
 import Card from "./Card";
 
-// type FormData = {
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-// };
+type FormData = {
+  firstName: string;
+  lastName: string;
+  // city: string;
+  // date:string;
+};
 
-const schema = Yup.object().shape({
-  firstName: Yup.string().required(),
-  lastName: Yup.string().required(),
-  city: Yup.string().required(),
-  dateOfBirth: Yup.date().required(),
+const schema = yup.object().shape({
+  firstName: yup.string().required('نام را وارد کنید'),
+  lastName: yup.string().required('نام خانوادگی را وارد کنید'),
+  // date: yup.string().required('تاریخ تولد را وارد کنید'),
+
+  // city: yup.string().required('شهر خود را انتخاب کنید'),
 });
 
 interface Option {
@@ -67,35 +65,27 @@ function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const [date, setDate] = useState("");
+  const [data, setData] = useState<FormData[]>([]);
+  // const [date, setDate] = useState("");
   const [image, setImage] = useState();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
 
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-<<<<<<< HEAD
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
-  const handleDateChange = (tarikh: Date | null) => {
-    setSelectedDate(tarikh);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const formattedDate = format(date, 'jYYYY/jMM/jDD');
+      // setSelectedDate(formattedDate);
+    } else {
+      setSelectedDate(null);
+    }
   };
-  // const handleDateChange = (tarikh:any) => {
-  //   setDate(tarikh);
-  //   console.log(tarikh)
-  // };
-=======
-  const handleDateChange = (tarikh:any) => {
-    setDate(tarikh);
-    console.log(tarikh)
-  };
->>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
+
+
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -114,7 +104,7 @@ function App() {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    console.log(selectedDate);
+    
   };
 
   const handleBack = () => {
@@ -132,6 +122,14 @@ function App() {
       [existingTheme],
     );
   };
+  const onSubmit = (formData: FormData) => {
+    // setData([...data, formData]);
+    console.log(formData)
+    setFirstName(formData.firstName)
+    setLastName(formData.lastName)
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
   return (
     <Container>
       <Box sx={style.steperWrapper} dir="rtl">
@@ -147,7 +145,7 @@ function App() {
           </Step>
         </Stepper>
         {activeStep === 0 && (
-          <Box sx={{ height: "20rem" }}>
+          <form style={{ height: "20rem" }} onSubmit={handleSubmit(onSubmit)} >
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>
@@ -161,16 +159,16 @@ function App() {
                   <FormControl fullWidth>
                     <FormLabel sx={style.FormLabelStyle}>نام</FormLabel>
                     <TextField
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                      name="firstName"
-                      variant="outlined"
-                      color="secondary"
-                      type="text"
+                      // onChange={(e) => setFirstName(e.target.value)}
+                    
+                      // name="firstName"
                       sx={{ mb: 3 }}
+                      // value={firstName}
+                      variant="outlined"
                       fullWidth
-                      value={firstName}
-                      // error={emailError}
+                      {...register('firstName')}
+                      error={Boolean(errors.firstName)}
+                      helperText={errors.firstName?.message}
                     />
                   </FormControl>
                   <FormControl fullWidth>
@@ -178,15 +176,16 @@ function App() {
                       نام خانوادگی
                     </FormLabel>
                     <TextField
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                      name="lastName"
+                      // onChange={(e) => setLastName(e.target.value)}
+                  
+                      // name="lastName"
+                  
+                      // value={lastName}
                       variant="outlined"
-                      color="secondary"
-                      type="txt"
-                      value={lastName}
-                      // error={passwordError}
                       fullWidth
+                      {...register('lastName')}
+                      error={Boolean(errors.lastName)}
+                      helperText={errors.lastName?.message}
                       sx={{ mb: 3 }}
                     />
                   </FormControl>
@@ -216,12 +215,10 @@ function App() {
                    
       <div dir="rtl">
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-<<<<<<< HEAD
-          <DateTimePicker label="Date Picker" defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
-=======
-          <DateTimePicker label="Date Picker" defaultValue={new Date(2022, 1, 1)}     value={date}
-        onChange={handleDateChange} />
->>>>>>> c7a478ef0998a63415ce64c4433f57a65e0e18f5
+          <DateTimePicker 
+          label="Date Picker"
+          // format={formatDate} 
+          defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
         </LocalizationProvider>
       </div>
   
@@ -232,14 +229,17 @@ function App() {
                     variant="contained"
                     sx={style.nextButton}
                     type="submit"
-                    onClick={handleNext}
+                    // onClick={handleNext}
+                   
                   >
                     بعدی
                   </Button>
+        
+
                 </Box>
               </Box>
             </Container>
-          </Box>
+          </form>
         )}
         {activeStep === 1 && (
           <Box>
@@ -295,6 +295,7 @@ function App() {
                   cityName={selectedOption?.label}
                   image={image}
                   name={firstName + " " + lastName}
+                  
                   date={selectedDate?.toString()}
                 />
                 <Box sx={style.buttonBox}>
