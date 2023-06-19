@@ -1,5 +1,9 @@
 import { useState } from "react";
 import React from 'react';
+import type { RootState } from '../store/index'
+import { useSelector, useDispatch } from 'react-redux'
+import {  interCity, interFirstName, interLastName,
+ } from '../store/FormSlice'
 import {
   Stepper,
   Step,
@@ -26,7 +30,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useSelector, useDispatch } from "react-redux";
+
 
 import { style } from "../Style/Form";
 
@@ -63,18 +67,22 @@ const ostan = [
 
 function App() {
   const [activeStep, setActiveStep] = useState(0);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [city,setCity]=useState("")
-  const [data, setData] = useState<FormData[]>([]);
-  // const [date, setDate] = useState("");
+ 
+  
+ 
+  const city  = useSelector((state: RootState) => state.User.city)
+
+  const firstName  = useSelector((state: RootState) => state.User.firstName)
+  const lastName  = useSelector((state: RootState) => state.User.lastName)
+
+  const dispatch = useDispatch()
   const [image, setImage] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-  const dispatch = useDispatch();
+
+
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const handleDateChange = (date: Date | null) => {
@@ -121,14 +129,11 @@ function App() {
     );
   };
   const onSubmit = (formData: FormData) => {
-    // setData([...data, formData]);
-    // const dateString: string = formData.date.toLocaleDateString('fa-IR');
-    // const formattedDate = new Intl.DateTimeFormat('fa-IR').format(formData.date.toString());
-    console.log(formData)
-    setFirstName(formData.firstName)
-    setLastName(formData.lastName)
-    setCity(formData.city)
-
+ 
+    
+    dispatch(interFirstName(formData.firstName))
+    dispatch(interLastName(formData.lastName))
+    dispatch(interCity(formData.city))
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   return (
@@ -258,7 +263,9 @@ function App() {
                   <Box sx={style.UploadBox}>
                     <input 
                     accept=".jpeg,.raw,.dng,.tiff,.bmp,.png,.svg,.webp,.gif"
-                    type="file" onChange={handleUploadImage} />
+                    type="file" onChange={handleUploadImage}
+                 
+                    />
                   </Box>
                 </Stack>
                 <Box sx={style.buttonBox}>
