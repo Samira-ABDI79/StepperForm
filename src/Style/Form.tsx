@@ -11,7 +11,7 @@ const FormLabelStyle = {
   mb: "0.3rem",
 };
 const formWrapper = {
-  width: "80%",
+  width: "30rem",
 
   borderRadius: "15px",
   padding: "2rem 2.5rem",
@@ -95,6 +95,18 @@ const stepStyle = {
   fontWeight: "700",
   color: "rgb(64, 64, 64)",
 };
+const UploadBox = {
+  background: "gray",
+  width: "80%",
+  margin: "auto",
+  padding: "9px 20px",
+  borderRadius: "15px",
+  border: "1px dashed black",
+  height: "5rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 const StepLabel = { margin: "0 0.2rem" };
 export const style = {
   labelText,
@@ -107,4 +119,5 @@ export const style = {
   prevButton,
   stepStyle,
   StepLabel,
+  UploadBox,
 };

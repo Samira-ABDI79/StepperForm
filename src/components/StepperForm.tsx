@@ -11,20 +11,19 @@ import {
   FormControl,
   FormLabel,
   Stack,
-  CardContent,
   MenuItem,
   Select,
 } from "@mui/material";
-import { css } from "@emotion/react";
 
 import { style } from "../Style/Form";
-import { styled } from "@material-ui/core";
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-};
+import Card from "./Card";
+
+// type FormData = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+// };
 interface Option {
   value: string;
   label: string;
@@ -191,34 +190,29 @@ function App() {
                     دریافت عکس
                   </Typography>
 
-                  <input
-                    type="file"
-                    // hidden
-                    // sx={{ mt: "2rem" }}
-                    // value={image}
-                    onChange={handleUploadImage}
-                  />
+                  <Box sx={style.UploadBox}>
+                    <input type="file" onChange={handleUploadImage} />
+                  </Box>
                 </Stack>
+                <Box sx={style.buttonBox}>
+                  <Button
+                    variant="contained"
+                    sx={style.nextButton}
+                    onClick={handleNext}
+                  >
+                    بعدی
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    sx={style.prevButton}
+                    onClick={handleBack}
+                  >
+                    قبلی
+                  </Button>
+                </Box>
               </Box>
             </Container>
-
-            <Box sx={style.buttonBox}>
-              <Button
-                variant="contained"
-                sx={style.nextButton}
-                onClick={handleNext}
-              >
-                بعدی
-              </Button>
-
-              <Button
-                variant="contained"
-                sx={style.prevButton}
-                onClick={handleBack}
-              >
-                قبلی
-              </Button>
-            </Box>
           </Box>
         )}
         {activeStep === 2 && (
@@ -228,92 +222,30 @@ function App() {
                 <Typography align="center" sx={style.stepStyle}>
                   مرحله دوم
                 </Typography>
-                <Typography>اطلاعات خود را مرور کنید:</Typography>
-                {image ? (
-                  <img
-                    style={{
-                      border: "1px solid black",
-                      marginTop: "2rem",
-                      width: "8rem",
-                      aspectRatio: "2/1",
-                    }}
-                    src={image}
-                    title="user"
-                  />
-                ) : (
-                  <div>samira</div>
-                )}
-                <CardContent>
-                  <Stack
-                    direction="row"
-                    justifyContent="start"
-                    alignItems="center"
+                <Card
+                  cityName={selectedOption?.label}
+                  image={image}
+                  name={firstName + " " + lastName}
+                  date={date}
+                />
+                <Box sx={style.buttonBox}>
+                  <Button
+                    variant="contained"
+                    sx={style.nextButton}
+                    onClick={handleFinish}
                   >
-                    <Typography
-                      gutterBottom
-                      variant="body1"
-                      component="label"
-                      sx={style.labelText}
-                    >
-                      نام ونام خانوادگی
-                    </Typography>
-                    <Typography gutterBottom variant="body1" component="p">
-                      {firstName + " " + lastName}
-                    </Typography>
-                  </Stack>
-                  <Stack
-                    direction="row"
-                    justifyContent="start"
-                    alignItems="center"
+                    ثبت نهایی
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={style.prevButton}
+                    onClick={handleBack}
                   >
-                    <Typography
-                      gutterBottom
-                      variant="body1"
-                      component="label"
-                      sx={style.labelText}
-                    >
-                      استان
-                    </Typography>
-                    <Typography gutterBottom variant="body1" component="p">
-                      {selectedOption?.label}
-                    </Typography>
-                  </Stack>
-                  <Stack
-                    direction="row"
-                    justifyContent="start"
-                    alignItems="center"
-                  >
-                    <Typography
-                      gutterBottom
-                      variant="body1"
-                      component="label"
-                      sx={style.labelText}
-                    >
-                      تاریخ تولد
-                    </Typography>
-                    <Typography gutterBottom variant="body1" component="p">
-                      {date}
-                    </Typography>
-                  </Stack>
-                </CardContent>
+                    قبلی
+                  </Button>
+                </Box>
               </Box>
             </Container>
-            <Box sx={style.buttonBox}>
-              <Button
-                variant="contained"
-                sx={style.nextButton}
-                onClick={handleFinish}
-              >
-                ثبت نهایی
-              </Button>
-              <Button
-                variant="contained"
-                sx={style.prevButton}
-                onClick={handleBack}
-              >
-                قبلی
-              </Button>
-            </Box>
           </Box>
         )}
       </Box>
