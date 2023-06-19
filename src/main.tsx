@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { Provider } from "react-redux";
-import store from "./store/index";
+import { store } from "./store"
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-console.log(store);
+
 
 const theme = createTheme({
   typography: {

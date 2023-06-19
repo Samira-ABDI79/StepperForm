@@ -1,4 +1,14 @@
-body {
-  font-family: "Vazirmatn" !important;
-  background-color: rgb(226, 242, 243);
+@font-face {
+  font-family: "Vazir";
+  src: url("../src/assets/fonts/Vazir-Bold.woff") format("truetype");
 }
+*{
+  font-family: "Vazir" !important;
+
+}
+body {
+  font-family: "Vazir" !important;
+  background-color: rgb(226, 242, 243);
+  font-family: 'CustomFont', Arial, sans-serif;
+}
+

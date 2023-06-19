@@ -81,7 +81,7 @@ function App() {
     if (date) {
       // const formattedDate = format(date, 'jYYYY/jMM/jDD');
       // const dateString: string = date.toLocaleDateString('fa-IR');
-      setDate(date)
+      // setDate(date)
 
     } else {
       setSelectedDate(null);
@@ -132,7 +132,7 @@ function App() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   return (
-    <Container>
+    <Container  >
       <Box sx={style.steperWrapper} dir="rtl">
         <Stepper activeStep={activeStep}>
           <Step>
@@ -146,7 +146,7 @@ function App() {
           </Step>
         </Stepper>
         {activeStep === 0 && (
-          <form style={{ height: "20rem" }} onSubmit={handleSubmit(onSubmit)} >
+          <form style={{ height: "20rem",marginBottom:"2rem" }} onSubmit={handleSubmit(onSubmit)} >
             <Container>
               <Box sx={style.formWrapper}>
                 <Typography align="center" sx={style.stepStyle}>
@@ -160,11 +160,9 @@ function App() {
                   <FormControl fullWidth>
                     <FormLabel sx={style.FormLabelStyle}>نام</FormLabel>
                     <TextField
-                      // onChange={(e) => setFirstName(e.target.value)}
                     
-                      // name="firstName"
                       sx={{ mb: 3 }}
-                      // value={firstName}
+                    
                       variant="outlined"
                       fullWidth
                       {...register('firstName')}
@@ -177,11 +175,7 @@ function App() {
                       نام خانوادگی
                     </FormLabel>
                     <TextField
-                      // onChange={(e) => setLastName(e.target.value)}
-                  
-                      // name="lastName"
-                  
-                      // value={lastName}
+                     
                       variant="outlined"
                       fullWidth
                       {...register('lastName')}
@@ -213,17 +207,17 @@ function App() {
                     </Box>
                   </FormControl>
 
-                  <FormControl fullWidth sx={{ mt: "0.5rem" }}>
+                  <FormControl fullWidth sx={{ mt: "0.5rem" }} dir="rtl"  >
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
                    
-      <div dir="rtl">
-        <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+      
+        <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
           <DateTimePicker 
           label="Date Picker"
           // format={formatDate} 
           defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
         </LocalizationProvider>
-      </div>
+      
   
                   </FormControl>
                 </Box>
@@ -232,7 +226,7 @@ function App() {
                     variant="contained"
                     sx={style.nextButton}
                     type="submit"
-                    // onClick={handleNext}
+                  
                    
                   >
                     بعدی
@@ -300,8 +294,8 @@ function App() {
                   image={image}
                   name={firstName + " " + lastName}
                   
-                  // date={selectedDate?.toString()}
-                  date={selectedOption.toLocaleDateString('fa-IR')}
+                  date={selectedDate?.toString()}
+                  // date={selectedOption.toLocaleDateString('fa-IR')}
                 />
                 <Box sx={style.buttonBox}>
                   <Button
