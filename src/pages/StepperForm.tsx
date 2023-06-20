@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {  interCity, interFirstName, interLastName,
  } from '../store/FormSlice'
  import moment from 'moment-jalaali';
-
-
+import { ostan } from "../data/inedex";
+import {schema} from "../schema"
 import {
   Stepper,
   Step,
@@ -33,33 +33,16 @@ import { style } from "../Style/Form";
 import Card from "../components/Card";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from "react-router-dom";
+import NextButton from "../components/NextButton";
 type FormData = {
   firstName: string;
   lastName: string;
   city: string;
   
 };
-const schema = yup.object().shape({
-  firstName: yup.string().required('نام را وارد کنید'),
-  lastName: yup.string().required('نام خانوادگی را وارد کنید'),
-  // date: yup.DateSchema().required('تاریخ تولد را وارد کنید'),
-  city: yup.string().required('شهر خود را انتخاب کنید'),
-  // file: yup
-  //   .mixed()
-  //   .required('Please select a file')
-   
-});
 
 
-const ostan = [
-  { value: "تهران", label: "تهران" },
-  { value: "البرز", label: "البرز" },
-  { value: "مشهد", label: "مشهد" },
-  { value: "تبریز", label: "تبریز" },
-  { value: "ارومیه", label: "ارومیه" },
-  { value: "گیلان", label: "گیلان" },
-  { value: "گرگان", label: "گرگان" },
-];
+
 
 function StepperForm() {
   const [activeStep, setActiveStep] = useState(0);
@@ -217,14 +200,7 @@ function StepperForm() {
                   </FormControl>
                 </Box>
                 <Box sx={style.buttonBox}>
-                  <Button
-                    variant="contained"
-                    sx={style.nextButton}
-                    type="submit" >
-                       <ArrowForwardIcon  />
-                   <span> بعدی</span>
-                   
-                  </Button>
+                <NextButton onClick={()=>console.log()} />
                 </Box>
               </Box>
             </Container>
@@ -254,17 +230,8 @@ function StepperForm() {
                     />
                   </Stack>
                 <Box sx={style.buttonBox}>
-                  <Button
-                    variant="contained"
-                    sx={style.nextButton}
-                    type="submit"
-                    onClick={handleNext}
-                  >
-                   <ArrowForwardIcon  />
-                   <span> بعدی</span>
-                   
-                  </Button>
-                 
+              
+                 <NextButton onClick={handleNext} />
 
                   <Button
                     variant="contained"
