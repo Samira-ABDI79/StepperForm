@@ -4,13 +4,13 @@ export interface FormState {
     firstName:String
     lastName:String
     city:String
-    date:String
+    date:Date|null
   }
   const initialState: FormState = {
     firstName:"samira",
     lastName:"abdi",
     city:"urmia",
-    date:"79/8/30"
+    date:new Date()
   }
 const FormSlice=createSlice({
     name:"Form",

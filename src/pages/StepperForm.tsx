@@ -42,7 +42,7 @@ type FormData = {
 const schema = yup.object().shape({
   firstName: yup.string().required('نام را وارد کنید'),
   lastName: yup.string().required('نام خانوادگی را وارد کنید'),
-  // date: yup.string().required('تاریخ تولد را وارد کنید'),
+  // date: yup.DateSchema().required('تاریخ تولد را وارد کنید'),
   city: yup.string().required('شهر خود را انتخاب کنید'),
   // file: yup
   //   .mixed()
@@ -74,7 +74,7 @@ function StepperForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [str,Setstr]=useState("")
   
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
@@ -101,8 +101,7 @@ function StepperForm() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     
 
-const jalaliDate = moment(selectedDate).format('jYYYY/jMM/jDD');
-console.log(jalaliDate)
+
   };
   const ITEM_HEIGHT = 38;
   const ITEM_PADDING_TOP = 8;
@@ -118,13 +117,12 @@ console.log(jalaliDate)
 // تبدیل تاریخ میلادی به شمسی
 
   const handleJalaliDateChange = (date: Date | null) => {
-    // تبدیل تاریخ میلادی به تاریخ شمسی با استفاده از jalali-moment
-    // const jalaliDate = date ? new JalaliMoment(date).locale('fa').format('YYYY/MM/DD') : null;
+  
     handleDateChange(date);
-
-    // console.log(jalaliDate);
-
-    //خطا دارم اینجا
+    const jalaliDate = moment(date).format('jYYYY/jMM/jDD');
+    Setstr(jalaliDate.toString())
+    console.log(jalaliDate)
+ 
   };
   return (
     <div className="StepperFormBackground"  >
@@ -294,7 +292,7 @@ console.log(jalaliDate)
                   image={image}
                   name={firstName + " " + lastName}
                   
-                  date={selectedDate}
+                  date={str}
                 
                 />
                 <Box sx={style.buttonBox}>
