@@ -23,26 +23,18 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-
-
 import { style } from "../Style/Form";
-
 import Card from "./Card";
-
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 type FormData = {
   firstName: string;
   lastName: string;
   city: string;
   
 };
-
 const schema = yup.object().shape({
   firstName: yup.string().required('نام را وارد کنید'),
   lastName: yup.string().required('نام خانوادگی را وارد کنید'),
@@ -68,34 +60,24 @@ const ostan = [
 function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [fileName, setFileName] = useState('');
- 
-  
- 
+  const state =useSelector(state=>state)
+  console.log(state)
   const city  = useSelector((state: RootState) => state.User.city)
-
   const firstName  = useSelector((state: RootState) => state.User.firstName)
   const lastName  = useSelector((state: RootState) => state.User.lastName)
-
+const shahr=useSelector((state: RootState) => state.User.city)
   const dispatch = useDispatch()
   const [image, setImage] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-
-
-
-
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const handleDateChange = (date: Date | null) => {
     if (date) {
-   
-
     } else {
       setSelectedDate(null);
     }
   };
-
-
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -105,33 +87,30 @@ function App() {
     };
     reader.readAsDataURL(file);
   }
-
- 
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleFinish = (e: any) => {
-    console.log(e);
-
     dispatch({ type: "SUBMIT_FORM", e });
-
-    
-   
   };
   const onSubmit = (formData: FormData) => {
- 
-    
     dispatch(interFirstName(formData.firstName))
     dispatch(interLastName(formData.lastName))
     dispatch(interCity(formData.city))
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const ITEM_HEIGHT = 38;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 5 + ITEM_PADDING_TOP,
+        width: '20ch',
+      },
+    },
   };
   return (
     <Container  >
@@ -194,34 +173,28 @@ function App() {
                     <FormControl variant="outlined" fullWidth error={Boolean(errors.city)}>
          
             <Select
+            MenuProps={MenuProps}
               labelId="select-label"
-            
              
               {...register('city')}
-              // defaultValue={city}
+            value={shahr}
+
+              defaultValue={city}
             >
                  {ostan.map((item) => (
        <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
       ))}
-             
             </Select>
             {errors.city && <p className="error-text" >{errors.city.message}</p>}
           </FormControl>
-                     
                     </Box>
                   </FormControl>
-
                   <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl"  >
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
-                   
-      
         <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
-          <DateTimePicker 
-         
-        
+          <DatePicker 
           defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
         </LocalizationProvider>
-      
                   </FormControl>
                 </Box>
                 <Box sx={style.buttonBox}>
@@ -249,10 +222,6 @@ function App() {
                 <Typography align="center" sx={style.stepStyle}>
                 دریافت عکس
                 </Typography>
-
-                
-                 
-
                   <Stack sx={style.UploadBox} justifyContent="center" alignItems="center" spacing={2} >
                   <label htmlFor="file-upload" className="custom-file-upload">
           {fileName || 'یک عکس انتخاب کنید'}
@@ -263,11 +232,8 @@ function App() {
                     style={{width:"80%"}}
                     // {...register('file')}
                     onChange={handleUploadImage}
-                    
-                 
                     />
                   </Stack>
-               
                 <Box sx={style.buttonBox}>
                   <Button
                     variant="contained"
