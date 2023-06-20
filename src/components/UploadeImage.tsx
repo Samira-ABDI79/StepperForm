@@ -18,7 +18,6 @@ interface Props  {
    
   }
 export default function UploadImage({
- 
     handleNext,
     handleBack,
     }:Props){

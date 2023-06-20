@@ -36,6 +36,7 @@ import {
   PrevButton,
   FinishButton,
   UploadImage,Card} from "../components";
+import ViewInformation from "../components/ViewInformation";
 
 type FormData = {
   firstName: string;
@@ -50,11 +51,7 @@ type FormData = {
 function StepperForm() {
   const [activeStep, setActiveStep] = useState(0);
   
-  const image  = useSelector((state: RootState) => state.User.image)
   
-  const city  = useSelector((state: RootState) => state.User.city)
-  const firstName  = useSelector((state: RootState) => state.User.firstName)
-  const lastName  = useSelector((state: RootState) => state.User.lastName)
 
   const dispatch = useDispatch()
   
@@ -203,26 +200,7 @@ function StepperForm() {
         <UploadImage  handleBack={handleBack} handleNext={handleNext}  />
         )}
         {activeStep === 2 && (
-          <Box className="marginBottom"  >
-            <Container>
-              <Box sx={style.formWrapper}>
-                <Typography align="center" sx={style.stepStyle}>
-                   ثبت و نمایش
-                </Typography>
-                <Card
-                 
-                  cityName={city}
-                  image={image}
-                  name={firstName + " " + lastName}
-                  date={str}
-                />
-                <Box sx={style.buttonBox}>
-                  <FinishButton onClick={handleFinish} />
-                  <PrevButton   onClick={handleBack} />
-                </Box>
-              </Box>
-            </Container>
-          </Box>
+         <ViewInformation handleFinish={handleFinish} handleBack={handleBack} />
         )}
       </Box>
     </div>
