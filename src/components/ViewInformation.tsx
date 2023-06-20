@@ -10,11 +10,6 @@ interface Props {
   handleBack: () => void;
 }
 export default function ViewInformation({ handleFinish, handleBack }: Props) {
-  //       const image  = useSelector((state: RootState) => state.User.image)
-  // const city  = useSelector((state: RootState) => state.User.city)
-  // const firstName  = useSelector((state: RootState) => state.User.firstName)
-  // const lastName  = useSelector((state: RootState) => state.User.lastName)
-  // const date  = useSelector((state: RootState) => state.User.date)
   const { date, lastName, firstName, city, image } = useSelector(
     (state: RootState) => state.User
   );

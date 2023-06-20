@@ -3,7 +3,6 @@ const labelText = {
   paddingLeft: "2rem",
   width: "8rem",
   direction: "rtl",
- 
 };
 const FormLabelStyle = {
   color: "#696969",
@@ -12,14 +11,14 @@ const FormLabelStyle = {
   mb: "16px",
 };
 const formWrapper = {
-  width: {lg:"30rem",sm:"80%"},
-minHeight:"35rem",
-height:"44rem",
+  width: { lg: "30rem", sm: "90%" },
+  minHeight: "35rem",
+  height: "44rem",
 
   borderRadius: "15px",
-  padding: "2rem 2.5rem",
+  padding: { lg: "2rem 2.5rem", sm: "2rem 3.5rem" },
   mt: "2rem",
- 
+
   backgroundColor: "#fff",
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
 };
@@ -42,14 +41,12 @@ const inputStyle = {
   marginTop: "10px",
 };
 const steperWrapper = {
- 
-mt:"3rem",
+  mt: "3rem",
   padding: "0 auto",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
- 
 };
 const buttonBox = {
   display: "flex",
@@ -58,7 +55,6 @@ const buttonBox = {
   mt: "1rem",
 };
 const nextButton = {
-
   backgroundColor: "rgb(0, 132, 168)",
 
   padding: "9px 20px",
@@ -66,8 +62,8 @@ const nextButton = {
   fontSize: "15px",
   color: "#fff",
   width: "8rem",
-display:"flex",
-justifyContent:"space-around",
+  display: "flex",
+  justifyContent: "space-around",
   fontWeight: "300",
 
   "&:hover": {
@@ -78,8 +74,8 @@ const prevButton = {
   fontSize: " 15px",
 
   fontWeight: "300",
-  display:"flex",
-  justifyContent:"space-around",
+  display: "flex",
+  justifyContent: "space-around",
   background: "#fba60a",
   color: "#fff",
   padding: "9px 20px",
