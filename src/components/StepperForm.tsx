@@ -4,6 +4,8 @@ import type { RootState } from '../store/index'
 import { useSelector, useDispatch } from 'react-redux'
 import {  interCity, interFirstName, interLastName,
  } from '../store/FormSlice'
+ import JalaliMoment from 'jalali-moment';
+
 import {
   Stepper,
   Step,
@@ -29,6 +31,7 @@ import * as yup from 'yup';
 import { style } from "../Style/Form";
 import Card from "./Card";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Link } from "react-router-dom";
 type FormData = {
   firstName: string;
   lastName: string;
@@ -60,24 +63,23 @@ const ostan = [
 function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [fileName, setFileName] = useState('');
-  const state =useSelector(state=>state)
-  console.log(state)
+  
   const city  = useSelector((state: RootState) => state.User.city)
   const firstName  = useSelector((state: RootState) => state.User.firstName)
   const lastName  = useSelector((state: RootState) => state.User.lastName)
-const shahr=useSelector((state: RootState) => state.User.city)
+
   const dispatch = useDispatch()
   const [image, setImage] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const handleDateChange = (date: Date | null) => {
-    if (date) {
-    } else {
-      setSelectedDate(null);
-    }
-  };
+  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  // const handleDateChange = (date: Date | null) => {
+  //   if (date) {
+  //   } else {
+  //     setSelectedDate(null);
+  //   }
+  // };
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -112,8 +114,18 @@ const shahr=useSelector((state: RootState) => state.User.city)
       },
     },
   };
+  const [selectedDate, handleDateChange] = useState<Date | null>(null);
+
+  const handleJalaliDateChange = (date: Date | null) => {
+    // تبدیل تاریخ میلادی به تاریخ شمسی با استفاده از jalali-moment
+    // const jalaliDate = date ? new JalaliMoment(date).locale('fa').format('YYYY/MM/DD') : null;
+    handleDateChange(date);
+    // console.log(jalaliDate);
+
+    //خطا دارم اینجا
+  };
   return (
-    <Container  >
+    <div className="StepperFormBackground"  >
       <Box sx={style.steperWrapper} dir="rtl">
         <Stepper activeStep={activeStep}>
           <Step >
@@ -175,11 +187,12 @@ const shahr=useSelector((state: RootState) => state.User.city)
             <Select
             MenuProps={MenuProps}
               labelId="select-label"
-             
+            
+              // defaultValue={city}
               {...register('city')}
-            value={shahr}
+            // value={city}
 
-              defaultValue={city}
+              // defaultValue={city}
             >
                  {ostan.map((item) => (
        <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
@@ -193,7 +206,13 @@ const shahr=useSelector((state: RootState) => state.User.city)
                     <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
         <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
           <DatePicker 
-          defaultValue={new Date(2022, 1, 1)}   value={selectedDate} onChange={handleDateChange} />
+            value={selectedDate} 
+          // onChange={handleDateChange} 
+          defaultValue={new Date()} 
+        onChange={handleJalaliDateChange}
+      
+      
+          />
         </LocalizationProvider>
                   </FormControl>
                 </Box>
@@ -283,7 +302,8 @@ const shahr=useSelector((state: RootState) => state.User.city)
                     type="submit"
                     onClick={handleFinish}
                   >
-                    ثبت نهایی
+                    <Link style={{color:"inherit" , textDecoration:"none"}} to="/finish" > ثبت نهایی</Link>
+                   
                   </Button>
                   <Button
                     variant="contained"
@@ -299,7 +319,7 @@ const shahr=useSelector((state: RootState) => state.User.city)
           </Box>
         )}
       </Box>
-    </Container>
+    </div>
   );
 }
 
