@@ -1,6 +1,6 @@
 import TextField from "@material-ui/core/TextField";
-import React, { useState } from "react";
-import {  FormControl, FormLabel, Paper } from "@material-ui/core";
+
+import {  FormControl, FormLabel } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 
 
@@ -10,10 +10,11 @@ interface InputProps{
  register:any
  label:string;
  name:string
+
 }
 
 export const CustomInput = ({error,message,register,label,name}:InputProps) => {
-  const { handleSubmit, reset, control } = useForm();
+  const {  control } = useForm();
   
 
   return (
@@ -25,15 +26,12 @@ export const CustomInput = ({error,message,register,label,name}:InputProps) => {
         control={control}
         render={() => (
           <TextField
-        
-          
-          
             variant="outlined"
             fullWidth
             {...register}
-            // {...register('firstName')}
             error={Boolean(error)}
             helperText={message}
+           
           />
         )}
       />

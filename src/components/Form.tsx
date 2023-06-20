@@ -1,17 +1,16 @@
 import { useState } from "react";
 import React from 'react';
-import {  useDispatch, useSelector } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import {  interCity, interFirstName, interLastName,interDate
  } from '../store/FormSlice'
  import moment from 'moment-jalaali';
 import { ostan } from "../data/inedex";
 import {schema} from "../schema"
 import { Controller } from "react-hook-form";
-import type { RootState } from '../store/index'
+
 
 import {
   Typography,
-  TextField,
   Box,
   Container,
   FormControl,
@@ -30,12 +29,13 @@ import {
   NextButton,
  } from "../components";
 import { CustomInput } from "./CustomInput";
-import CustomSelect from "./CustomSelect";
+
 
 type FormData = {
   firstName: string;
   lastName: string;
   city: string;
+  // date:string;
 };
 interface Props  {
     handleFinish: () => void ;
@@ -54,7 +54,7 @@ export default function Form({ handleFinish  , handleNext}:Props){
         dispatch(interFirstName(formData.firstName))
         dispatch(interLastName(formData.lastName))
         dispatch(interCity(formData.city))
-      
+     
         handleNext()
       };
   
@@ -94,7 +94,7 @@ export default function Form({ handleFinish  , handleNext}:Props){
               <CustomInput name="firstName" label="نام" error={errors.firstName}
 message={errors.firstName?.message} register={register('firstName')} />
             
-              <CustomInput name="lastname" label="نام خانوادگی" error={errors.lastName}
+              <CustomInput name="lastname" label="نام خانوادگی" error={errors.lastName} 
 message={errors.lastName?.message} register={register('lastName')} />
               <FormControl fullWidth style={{ marginBottom: '16px ' }}>
                 <FormLabel sx={style.FormLabelStyle}>
@@ -107,11 +107,11 @@ message={errors.lastName?.message} register={register('lastName')} />
         MenuProps={MenuProps}
           labelId="select-label"
         
-          // defaultValue={city}
+          
           {...register('city')}
       
 
-          // defaultValue={city}
+          
         >
              {ostan.map((item) => (
    <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
@@ -121,8 +121,6 @@ message={errors.lastName?.message} register={register('lastName')} />
       </FormControl>
                 </Box>
               </FormControl>
-
-            
               <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl"  >
                 <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
     <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
