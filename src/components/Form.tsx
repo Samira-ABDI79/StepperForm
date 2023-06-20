@@ -44,7 +44,7 @@ interface Props {
 
 export default function Form({ handleFinish, handleNext }: Props) {
   const dispatch = useDispatch();
-  const { date, lastName, firstName, city, image } = useSelector(
+  const { lastName, firstName, city, date } = useSelector(
     (state: RootState) => state.User
   );
   const {
