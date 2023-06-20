@@ -29,6 +29,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import {
   NextButton,
  } from "../components";
+import { CustomInput } from "./CustomInput";
+import CustomSelect from "./CustomSelect";
 
 type FormData = {
   firstName: string;
@@ -42,10 +44,12 @@ interface Props  {
 
 export default function Form({ handleFinish  , handleNext}:Props){
 
+
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const {  reset, control } = useForm();
     const onSubmit = (formData: FormData) => {
         dispatch(interFirstName(formData.firstName))
         dispatch(interLastName(formData.lastName))
@@ -53,6 +57,7 @@ export default function Form({ handleFinish  , handleNext}:Props){
       
         handleNext()
       };
+  
       const ITEM_HEIGHT = 38;
       const ITEM_PADDING_TOP = 8;
       const MenuProps = {
@@ -72,7 +77,7 @@ export default function Form({ handleFinish  , handleNext}:Props){
         const jalaliDate = moment(date).format('jYYYY/jMM/jDD');
         dispatch(interDate(jalaliDate))
       };
-      const {  reset, control } = useForm();
+     
     return (
         <form className="marginBottom" onSubmit={handleSubmit(onSubmit)} >
         <Container>
@@ -85,50 +90,15 @@ export default function Form({ handleFinish  , handleNext}:Props){
               onSubmit={handleSubmit(handleFinish)}
               sx={{ py: "1.5rem" }}
             >
-              <FormControl fullWidth>
-                <FormLabel sx={style.FormLabelStyle}>نام</FormLabel>
-                <Controller
-        name={"userName"}
-        control={control}
-        render={() => (
-          <TextField
-          //  value={firstName}
-            sx={{ mb: 3 }}
-          
-            variant="outlined"
-            fullWidth
-            {...register('firstName')}
-            error={Boolean(errors.firstName)}
-            helperText={errors.firstName?.message}
-          />
-        )}
-      />
-              
-              </FormControl>
-              <FormControl fullWidth>
+             
+              <CustomInput name="firstName" label="نام" error={errors.firstName}
+message={errors.firstName?.message} register={register('firstName')} />
+            
+              <CustomInput name="lastname" label="نام خانوادگی" error={errors.lastName}
+message={errors.lastName?.message} register={register('lastName')} />
+              <FormControl fullWidth style={{ marginBottom: '16px ' }}>
                 <FormLabel sx={style.FormLabelStyle}>
-                  نام خانوادگی
-                </FormLabel>
-                <Controller
-        name={"userName"}
-        control={control}
-        render={() => (
-          <TextField
-          //  value={lastName}
-            variant="outlined"
-            fullWidth
-            {...register('lastName')}
-            error={Boolean(errors.lastName)}
-            helperText={errors.lastName?.message}
-            sx={{ mb: 3 }}
-          />
-        )}
-      />
-              
-              </FormControl>
-              <FormControl fullWidth>
-                <FormLabel sx={style.FormLabelStyle}>
-                  استان محل سکونت{" "}
+                  استان محل سکونت
                 </FormLabel>
                 <Box>
                 <FormControl variant="outlined" fullWidth error={Boolean(errors.city)}>
@@ -151,6 +121,8 @@ export default function Form({ handleFinish  , handleNext}:Props){
       </FormControl>
                 </Box>
               </FormControl>
+
+            
               <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl"  >
                 <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
     <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
@@ -159,7 +131,6 @@ export default function Form({ handleFinish  , handleNext}:Props){
         control={control}
         render={() => (
           <DatePicker 
-      
       defaultValue={new Date()} 
     onChange={handleJalaliDateChange}
       />

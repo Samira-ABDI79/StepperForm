@@ -9,7 +9,7 @@ const FormLabelStyle = {
   color: "#696969",
   fontSize: "15px",
   fontWeigt: "400",
-  mb: "0.3rem",
+  mb: "16px",
 };
 const formWrapper = {
   width: {lg:"30rem",sm:"80%"},

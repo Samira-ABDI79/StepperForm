@@ -101,3 +101,12 @@ body {
   margin-bottom: 0;
   margin-left: 14px;
 }
+.FormLabelStyle  {
+  color: #696969;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+};
+.inputStyle{
+  margin: 2rem 0;
+}

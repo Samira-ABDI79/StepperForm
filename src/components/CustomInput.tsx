@@ -1,30 +1,44 @@
 import TextField from "@material-ui/core/TextField";
 import React, { useState } from "react";
-import { Button, Paper } from "@material-ui/core";
+import {  FormControl, FormLabel, Paper } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
-interface FormInput{
-  name:any;
- 
-   label:any;
-}
-export default function  FormInputText ({ name, label }:FormInput) {
-  const { handleSubmit, reset, control } = useForm();
 
-   
-    const onSubmit = (data: any) => console.log(data);
+
+interface InputProps{
+ error :any
+ message:any
+ register:any
+ label:string;
+ name:string
+}
+
+export const CustomInput = ({error,message,register,label,name}:InputProps) => {
+  const { handleSubmit, reset, control } = useForm();
   
-    return (
-      <form>
-        <Controller
-          name={"textValue"}
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextField onChange={onChange} value={value} label={label} />
-          )}
-        />
-        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
-        <Button onClick={() => reset()} variant={"outlined"}>Reset</Button>
-      </form>
-    
+
+  return (
+ <div>
+     <FormControl fullWidth style={{ marginBottom: '16px ' }} >
+                <FormLabel  style={{ margin: '16px 0' }} >{label}</FormLabel>
+                <Controller
+        name={name}
+        control={control}
+        render={() => (
+          <TextField
+        
+          
+          
+            variant="outlined"
+            fullWidth
+            {...register}
+            // {...register('firstName')}
+            error={Boolean(error)}
+            helperText={message}
+          />
+        )}
+      />
+              
+              </FormControl>
+ </div>
   );
 };

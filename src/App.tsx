@@ -6,14 +6,14 @@ import StepperForm from "./pages/StepperForm";
 
 import Layout from "./components/layout/layout";
 import Home from "./pages/Home";
-import FormInputText from "../src/components/CustomInput"
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<StepperForm />} />
-        <Route path="/xs" element={<FormInputText name="samira"  label="label" />} />
+  
 
         <Route element={<Layout />}>
         <Route path="/finish" element={<Home />} />
