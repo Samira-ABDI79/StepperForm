@@ -9,13 +9,9 @@ import {  interImage} from "../store/FormSlice"
 
 
 interface Props  {
-    // handleSubmit: () => void ;
-    // handleUploadImage: () => void ;
+  
     handleNext: () => void ;
     handleBack: () => void ;
-
-
-   
   }
 export default function UploadImage({
     handleNext,

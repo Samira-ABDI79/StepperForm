@@ -8,11 +8,11 @@ export interface FormState {
     date:any
   }
   const initialState: FormState = {
-    firstName:"samira",
-    lastName:"abdi",
-    city:"urmia",
+    firstName:"",
+    lastName:"",
+    city:"",
     image:"",
-    date:"1379/8/30"
+    date:""
   }
 const FormSlice=createSlice({
     name:"Form",

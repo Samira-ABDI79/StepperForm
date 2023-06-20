@@ -6,11 +6,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function Sidebar() {
-  // const [open, setOpen] = React.useState(true);
-
-  // const handleClick = () => {
-  //   setOpen(!open);
-  // };
+ 
 
   return (
     <List

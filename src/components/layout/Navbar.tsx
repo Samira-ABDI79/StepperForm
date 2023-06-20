@@ -44,6 +44,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
   const firstName  = useSelector((state: RootState) => state.User.firstName)
   const lastName  = useSelector((state: RootState) => state.User.lastName)
+  const image  = useSelector((state: RootState) => state.User.image)
+
   return (
     <AppBar
       position="fixed"
@@ -105,7 +107,7 @@ export default function Navbar() {
             </Typography>
             <Avatar
               alt="Remy Sharp"
-              src="https://img.freepik.com/free-photo/portrait-beautiful-mature-blonde-bearded-guy-with-trendy-hairdo-casual-grey-shirt-smiling_176420-15741.jpg?size=626&ext=jpg&ga=GA1.1.1113169498.1683297183&semt=sph"
+              src={image}
             />
           </Stack>
         </Stack>

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import React from 'react';
-import {  useDispatch } from 'react-redux'
+import {  useDispatch, useSelector } from 'react-redux'
 import {  interCity, interFirstName, interLastName,interDate
  } from '../store/FormSlice'
  import moment from 'moment-jalaali';
 import { ostan } from "../data/inedex";
 import {schema} from "../schema"
-import {
+import { Controller } from "react-hook-form";
+import type { RootState } from '../store/index'
 
- 
+import {
   Typography,
   TextField,
   Box,
@@ -40,6 +41,7 @@ interface Props  {
   }
 
 export default function Form({ handleFinish  , handleNext}:Props){
+
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -67,13 +69,10 @@ export default function Form({ handleFinish  , handleNext}:Props){
     // تبدیل تاریخ میلادی به شمسی
     
       const handleJalaliDateChange = (date: Date | null) => {
-      
-      
         const jalaliDate = moment(date).format('jYYYY/jMM/jDD');
         dispatch(interDate(jalaliDate))
-
-      
       };
+      const {  reset, control } = useForm();
     return (
         <form className="marginBottom" onSubmit={handleSubmit(onSubmit)} >
         <Container>
@@ -88,30 +87,44 @@ export default function Form({ handleFinish  , handleNext}:Props){
             >
               <FormControl fullWidth>
                 <FormLabel sx={style.FormLabelStyle}>نام</FormLabel>
-                <TextField
-                
-                  sx={{ mb: 3 }}
-                
-                  variant="outlined"
-                  fullWidth
-                  {...register('firstName')}
-                  error={Boolean(errors.firstName)}
-                  helperText={errors.firstName?.message}
-                />
+                <Controller
+        name={"userName"}
+        control={control}
+        render={() => (
+          <TextField
+          //  value={firstName}
+            sx={{ mb: 3 }}
+          
+            variant="outlined"
+            fullWidth
+            {...register('firstName')}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName?.message}
+          />
+        )}
+      />
+              
               </FormControl>
               <FormControl fullWidth>
                 <FormLabel sx={style.FormLabelStyle}>
                   نام خانوادگی
                 </FormLabel>
-                <TextField
-                 
-                  variant="outlined"
-                  fullWidth
-                  {...register('lastName')}
-                  error={Boolean(errors.lastName)}
-                  helperText={errors.lastName?.message}
-                  sx={{ mb: 3 }}
-                />
+                <Controller
+        name={"userName"}
+        control={control}
+        render={() => (
+          <TextField
+          //  value={lastName}
+            variant="outlined"
+            fullWidth
+            {...register('lastName')}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName?.message}
+            sx={{ mb: 3 }}
+          />
+        )}
+      />
+              
               </FormControl>
               <FormControl fullWidth>
                 <FormLabel sx={style.FormLabelStyle}>
@@ -126,7 +139,7 @@ export default function Form({ handleFinish  , handleNext}:Props){
         
           // defaultValue={city}
           {...register('city')}
-        // value={city}
+      
 
           // defaultValue={city}
         >
@@ -141,14 +154,18 @@ export default function Form({ handleFinish  , handleNext}:Props){
               <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl"  >
                 <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
     <LocalizationProvider  dateAdapter={AdapterDateFnsJalali}>
-      <DatePicker 
-        value={selectedDate} 
+    <Controller
+        name="DatePicker"
+        control={control}
+        render={() => (
+          <DatePicker 
       
       defaultValue={new Date()} 
     onChange={handleJalaliDateChange}
-  
-  
       />
+        )}
+      />
+    
     </LocalizationProvider>
               </FormControl>
             </Box>
