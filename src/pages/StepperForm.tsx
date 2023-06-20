@@ -1,44 +1,21 @@
 import { useState } from "react";
-
 import {  useDispatch } from 'react-redux'
-
-
 import {
   Stepper,
   Step,
   StepLabel,
- 
-
   Box,
-
- 
 } from "@mui/material";
-
-
-
 import { style } from "../Style/Form";
-
-
-
 import {
- 
-  
   UploadImage , Form,ViewInformation} from "../components";
-
-
-
-
 
 
 
 
 function StepperForm() {
   const [activeStep, setActiveStep] = useState(0);
-  
-  
   const dispatch = useDispatch()
-
-  
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };

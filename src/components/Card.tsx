@@ -1,6 +1,6 @@
-import { Stack, Typography, Box, CardContent } from "@mui/material";
+import {  Typography, Box, CardContent } from "@mui/material";
+import InformationRow from "./InformationRow"
 
-import { style } from "../Style/Form";
 
 interface inputs {
   cityName: any;
@@ -29,9 +29,7 @@ export default function Card({ image, name, cityName, date }: inputs) {
           />
             </div>
             <div className="flip-card-back">
-            
               <p>موفق باشی</p>
-        
             </div>
           </div>
         </div>
@@ -40,45 +38,9 @@ export default function Card({ image, name, cityName, date }: inputs) {
           <div>no image</div>
         )}
         <CardContent sx={{mt:"1rem"}}>
-          <Stack direction="row" justifyContent="start" alignItems="center">
-            <Typography
-              gutterBottom
-              variant="body1"
-              component="label"
-              sx={style.labelText}
-            >
-              نام ونام خانوادگی :
-            </Typography>
-            <Typography gutterBottom variant="body1" component="p">
-              {name}
-            </Typography>
-          </Stack>
-          <Stack direction="row" justifyContent="start" alignItems="center">
-            <Typography
-              gutterBottom
-              variant="body1"
-              component="label"
-              sx={style.labelText}
-            >
-              استان :
-            </Typography>
-            <Typography gutterBottom variant="body1" component="p">
-              {cityName}
-            </Typography>
-          </Stack>
-          <Stack direction="row" justifyContent="start" alignItems="center">
-            <Typography
-              gutterBottom
-              variant="body1"
-              component="label"
-              sx={style.labelText}
-            >
-              تاریخ تولد :
-            </Typography>
-            <Typography gutterBottom variant="body1" component="p">
-              {date}
-            </Typography>
-          </Stack>
+          <InformationRow label="نام ونام خانوادگی " text={name} />
+          <InformationRow label="استان" text={cityName} />
+          <InformationRow label="تاریخ تولد " text={date} />
         </CardContent>
       </Box>
     </>
