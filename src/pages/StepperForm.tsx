@@ -34,6 +34,8 @@ import Card from "../components/Card";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from "react-router-dom";
 import NextButton from "../components/NextButton";
+import PrevButton from "../components/PrevButton";
+import FinishButton from "../components/FinishButton";
 type FormData = {
   firstName: string;
   lastName: string;
@@ -74,8 +76,8 @@ function StepperForm() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleFinish = (e: any) => {
-    dispatch({ type: "SUBMIT_FORM", e });
+  const handleFinish = () => {
+    dispatch({ type: "SUBMIT_FORM" });
   };
   const onSubmit = (formData: FormData) => {
     dispatch(interFirstName(formData.firstName))
@@ -233,14 +235,9 @@ function StepperForm() {
               
                  <NextButton onClick={handleNext} />
 
-                  <Button
-                    variant="contained"
-                    sx={style.prevButton}
-                    onClick={handleBack}
-                  >
-                 <span>   قبلی</span>
-                 <ArrowBackIcon /> 
-                  </Button>
+                
+
+                  <PrevButton   onClick={handleBack} />
                 </Box>
               </Box>
             </Container>
@@ -263,23 +260,10 @@ function StepperForm() {
                 
                 />
                 <Box sx={style.buttonBox}>
-                  <Button
-                    variant="contained"
-                    sx={style.nextButton}
-                    type="submit"
-                    onClick={handleFinish}
-                  >
-                    <Link style={{color:"inherit" , textDecoration:"none"}} to="/finish" > ثبت نهایی</Link>
-                   
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={style.prevButton}
-                    onClick={handleBack}
-                  >
-                 <span>   قبلی</span>
-                 <ArrowBackIcon /> 
-                  </Button>
+               
+                  <FinishButton onClick={handleFinish} />
+                  <PrevButton   onClick={handleBack} />
+
                 </Box>
               </Box>
             </Container>
