@@ -5,14 +5,14 @@ export interface FormState {
     lastName:String
     city:String
     image:any
-    date:Date|null
+    date:any
   }
   const initialState: FormState = {
     firstName:"samira",
     lastName:"abdi",
     city:"urmia",
     image:"",
-    date:new Date()
+    date:"1379/8/30"
   }
 const FormSlice=createSlice({
     name:"Form",
@@ -23,6 +23,8 @@ const FormSlice=createSlice({
         interCity:(state,action)=>{state.city=action.payload},
         interDate:(state,action)=>{state.date=action.payload},
         interImage:(state,action)=>{state.image=action.payload},
+       
+
 
     }
 })
@@ -30,6 +32,6 @@ const FormSlice=createSlice({
 export const { interFirstName,
   interLastName,
   interCity,
-  interDate, interImage} = FormSlice.actions
+   interImage,interDate} = FormSlice.actions
 
 export default FormSlice.reducer

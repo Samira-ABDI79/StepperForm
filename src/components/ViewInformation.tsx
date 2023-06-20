@@ -16,10 +16,11 @@ export default function ViewInformation({
   
     }:Props){
         const image  = useSelector((state: RootState) => state.User.image)
-  
   const city  = useSelector((state: RootState) => state.User.city)
   const firstName  = useSelector((state: RootState) => state.User.firstName)
   const lastName  = useSelector((state: RootState) => state.User.lastName)
+  const date  = useSelector((state: RootState) => state.User.date)
+
     return(
         <>
         <Box className="marginBottom"  >
@@ -33,7 +34,7 @@ export default function ViewInformation({
                   cityName={city}
                   image={image}
                   name={firstName + " " + lastName}
-                  date={"fsdf"}
+                  date={date}
                 />
                 <Box sx={style.buttonBox}>
                   <FinishButton onClick={handleFinish} />
