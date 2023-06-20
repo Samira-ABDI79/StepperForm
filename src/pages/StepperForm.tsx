@@ -4,7 +4,8 @@ import type { RootState } from '../store/index'
 import { useSelector, useDispatch } from 'react-redux'
 import {  interCity, interFirstName, interLastName,
  } from '../store/FormSlice'
- import JalaliMoment from 'jalali-moment';
+ import moment from 'moment-jalaali';
+
 
 import {
   Stepper,
@@ -29,7 +30,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { style } from "../Style/Form";
-import Card from "./Card";
+import Card from "../components/Card";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from "react-router-dom";
 type FormData = {
@@ -60,7 +61,7 @@ const ostan = [
   { value: "گرگان", label: "گرگان" },
 ];
 
-function App() {
+function StepperForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [fileName, setFileName] = useState('');
   
@@ -74,12 +75,7 @@ function App() {
     resolver: yupResolver(schema),
   });
   // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  // const handleDateChange = (date: Date | null) => {
-  //   if (date) {
-  //   } else {
-  //     setSelectedDate(null);
-  //   }
-  // };
+  
   function handleUploadImage(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -103,6 +99,10 @@ function App() {
     dispatch(interLastName(formData.lastName))
     dispatch(interCity(formData.city))
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    
+
+const jalaliDate = moment(selectedDate).format('jYYYY/jMM/jDD');
+console.log(jalaliDate)
   };
   const ITEM_HEIGHT = 38;
   const ITEM_PADDING_TOP = 8;
@@ -115,11 +115,13 @@ function App() {
     },
   };
   const [selectedDate, handleDateChange] = useState<Date | null>(null);
+// تبدیل تاریخ میلادی به شمسی
 
   const handleJalaliDateChange = (date: Date | null) => {
     // تبدیل تاریخ میلادی به تاریخ شمسی با استفاده از jalali-moment
     // const jalaliDate = date ? new JalaliMoment(date).locale('fa').format('YYYY/MM/DD') : null;
     handleDateChange(date);
+
     // console.log(jalaliDate);
 
     //خطا دارم اینجا
@@ -292,7 +294,7 @@ function App() {
                   image={image}
                   name={firstName + " " + lastName}
                   
-                  date={selectedDate?.toString()}
+                  date={selectedDate}
                 
                 />
                 <Box sx={style.buttonBox}>
@@ -323,4 +325,4 @@ function App() {
   );
 }
 
-export default App;
+export default StepperForm;

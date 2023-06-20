@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { theme } from "./Theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 
-import StepperForm from "./components/StepperForm";
+import StepperForm from "./pages/StepperForm";
 
 import Layout from "./components/layout/layout";
 import Home from "./pages/Home";
