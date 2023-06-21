@@ -89,8 +89,8 @@ const prevButton = {
 };
 const stepStyle = {
   my: "1rem",
-  mt: "2rem",
-  py: "0.5rem",
+ 
+  
   fontSize: " 36px",
   lineHeight: "52px",
   fontWeight: "700",

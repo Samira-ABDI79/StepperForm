@@ -7,14 +7,13 @@ import StepperForm from "./pages/StepperForm";
 import Layout from "./components/layout/layout";
 import Home from "./pages/Home";
 
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<StepperForm />} />
-  
-
         <Route element={<Layout />}>
         <Route path="/finish" element={<Home />} />
 

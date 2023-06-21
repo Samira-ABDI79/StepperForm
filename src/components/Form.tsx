@@ -35,7 +35,7 @@ type FormData = {
   firstName: string;
   lastName: string;
   city: string;
-  // date:string;
+  // dateOfBirth: Date;
 };
 interface Props {
   handleFinish: () => void;
@@ -65,7 +65,6 @@ export default function Form({ handleFinish, handleNext }: Props) {
     dispatch(interFirstName(formData.firstName));
     dispatch(interLastName(formData.lastName));
     dispatch(interCity(formData.city));
-
     handleNext();
   };
 
@@ -155,6 +154,7 @@ export default function Form({ handleFinish, handleNext }: Props) {
                     <DatePicker
                       defaultValue={new Date()}
                       onChange={handleJalaliDateChange}
+                      // {...register('dateOfBirth')}
                     />
                   )}
                 />
