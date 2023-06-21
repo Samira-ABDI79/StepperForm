@@ -1,6 +1,6 @@
 import TextField from "@material-ui/core/TextField";
-import React, { useState } from "react";
-import { FormControl, FormLabel, Paper } from "@material-ui/core";
+
+import { FormControl, FormLabel } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 
 interface InputProps {
@@ -18,7 +18,7 @@ export const CustomInput = ({
   label,
   name,
 }: InputProps) => {
-  const { handleSubmit, reset, control } = useForm();
+  const {  control } = useForm();
 
   return (
     <div>

@@ -24,7 +24,7 @@ export default function ViewInformation({ handleFinish, handleBack }: Props) {
             <Card
               cityName={city}
               image={image}
-              name={firstName + " " + lastName}
+              name={`${firstName} ${lastName}`}
               date={date}
             />
             <Box sx={style.buttonBox}>

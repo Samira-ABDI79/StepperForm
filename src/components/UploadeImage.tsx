@@ -3,10 +3,10 @@ import { style } from "../Style/Form";
 import NextButton from "./NextButton";
 import PrevButton from "./PrevButton";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { interImage } from "../store/FormSlice";
-import { RootState } from "../store";
+// import { RootState } from "../store";
 
 interface Props {
   handleNext: () => void;

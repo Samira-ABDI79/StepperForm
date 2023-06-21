@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   interCity,
@@ -44,7 +44,7 @@ interface Props {
 
 export default function Form({ handleFinish, handleNext }: Props) {
   const dispatch = useDispatch();
-  const { lastName, firstName, city, date } = useSelector(
+  const { lastName, firstName, city } = useSelector(
     (state: RootState) => state.User
   );
   const {
@@ -60,7 +60,7 @@ export default function Form({ handleFinish, handleNext }: Props) {
     },
     resolver: yupResolver(schema),
   });
-  const { reset, control } = useForm();
+  const {  control } = useForm();
   const onSubmit = (formData: FormData) => {
     dispatch(interFirstName(formData.firstName));
     dispatch(interLastName(formData.lastName));
@@ -78,7 +78,7 @@ export default function Form({ handleFinish, handleNext }: Props) {
       },
     },
   };
-  const [selectedDate, handleDateChange] = useState<Date | null>(null);
+  // const [selectedDate, handleDateChange] = useState<Date | null>(null);
   //   const [selectedItem, setSelectedItem] = useState<Date | null>(null);
 
   // تبدیل تاریخ میلادی به شمسی
