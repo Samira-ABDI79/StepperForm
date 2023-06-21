@@ -3,16 +3,36 @@ import { style } from "../Style/Form";
 import NextButton from "./NextButton";
 import PrevButton from "./PrevButton";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import * as Yup from 'yup';
 
 import { interImage } from "../store/FormSlice";
-// import { RootState } from "../store";
+import { useForm } from "react-hook-form";
+import { RootState } from "../store";
+
 
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
 }
+type FormData =Yup.InferType<typeof schema>
+const schema = Yup.object().shape({
+ 
+  photo: Yup.mixed().required('عکس الزامی است'),
+});
 export default function UploadImage({ handleNext, handleBack }: Props) {
+  const  image  = useSelector(
+    (state: RootState) => state.User.image
+  );
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    // defaultValues: {
+    // image
+    // },
+    resolver: yupResolver(schema),
+  });
+
   const [fileName, setFileName] = useState("");
 
   const dispatch = useDispatch();
@@ -25,12 +45,15 @@ export default function UploadImage({ handleNext, handleBack }: Props) {
     };
     reader.readAsDataURL(file);
   }
+  const handleFormSubmit = (data: FormData) => {
+    console.log(data);
+   };
   return (
     <Box className="marginBottom">
       <Container>
         <Box
           component="form"
-          // onSubmit={handleSubmit(handleFinish)}
+          onSubmit={handleSubmit(handleFormSubmit)}
           sx={style.formWrapper}
         >
           <Typography align="center" sx={style.stepStyle}>
@@ -50,12 +73,14 @@ export default function UploadImage({ handleNext, handleBack }: Props) {
               type="file"
               style={{ width: "80%" }}
               required
-              // {...register('file')}
+              {...register('photo')}
               // value={imageSrc}
               onChange={handleUploadImage}
             />
           </Stack>
-
+          {errors.photo && (
+          <span >{errors.photo.message}</span>
+        )}
           <Box sx={style.buttonBox}>
             <NextButton disabled={!fileName} onClick={handleNext} />
             <PrevButton onClick={handleBack} />
