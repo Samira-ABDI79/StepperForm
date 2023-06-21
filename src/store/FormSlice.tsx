@@ -6,6 +6,7 @@ export interface FormState {
   city: string;
   image: any;
   date: any;
+  dateError:boolean;
 }
 const initialState: FormState = {
   firstName: "",
@@ -13,6 +14,7 @@ const initialState: FormState = {
   city: "",
   image: "",
   date: "",
+  dateError:false,
 };
 const FormSlice = createSlice({
   name: "Form",
@@ -33,6 +35,10 @@ const FormSlice = createSlice({
     interImage: (state, action) => {
       state.image = action.payload;
     },
+    
+    setDateEror: (state, action) => {
+      state.dateError = action.payload;
+    },
   },
 });
 
@@ -42,6 +48,7 @@ export const {
   interCity,
   interImage,
   interDate,
+  setDateEror
 } = FormSlice.actions;
 
 export default FormSlice.reducer;

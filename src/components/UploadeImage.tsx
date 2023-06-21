@@ -3,14 +3,14 @@ import { style } from "../Style/Form";
 import NextButton from "./NextButton";
 import PrevButton from "./PrevButton";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as Yup from 'yup';
 
 import { interImage } from "../store/FormSlice";
 import { useForm } from "react-hook-form";
-import { RootState } from "../store";
+// import { RootState } from "../store";
 
 
 interface Props {
@@ -23,12 +23,12 @@ const schema = Yup.object().shape({
   photo: Yup.mixed().required('عکس الزامی است'),
 });
 export default function UploadImage({ handleNext, handleBack }: Props) {
-  const  image  = useSelector(
-    (state: RootState) => state.User.image
-  );
+  // const  image  = useSelector(
+  //   (state: RootState) => state.User.image
+  // );
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     // defaultValues: {
-    // image
+    // photo
     // },
     resolver: yupResolver(schema),
   });

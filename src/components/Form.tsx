@@ -5,6 +5,7 @@ import {
   interFirstName,
   interLastName,
   interDate,
+  setDateEror
 } from "../store/FormSlice";
 import moment from "moment-jalaali";
 import { ostan } from "../data/inedex";
@@ -44,7 +45,7 @@ interface Props {
 
 export default function Form({ handleFinish, handleNext }: Props) {
   const dispatch = useDispatch();
-  const { lastName, firstName, city } = useSelector(
+  const { lastName, firstName, city,dateError,date } = useSelector(
     (state: RootState) => state.User
   );
   const {
@@ -65,7 +66,14 @@ export default function Form({ handleFinish, handleNext }: Props) {
     dispatch(interFirstName(formData.firstName));
     dispatch(interLastName(formData.lastName));
     dispatch(interCity(formData.city));
-    handleNext();
+    if(date){
+      handleNext();
+    dispatch(setDateEror(false));
+    }
+    else{
+    dispatch(setDateEror(true));
+
+    }
   };
 
   const ITEM_HEIGHT = 38;
@@ -152,13 +160,17 @@ export default function Form({ handleFinish, handleNext }: Props) {
                   control={control}
                   render={() => (
                     <DatePicker
-                      defaultValue={new Date()}
+                 
                       onChange={handleJalaliDateChange}
-                      // {...register('dateOfBirth')}
+                    
                     />
                   )}
                 />
               </LocalizationProvider>
+              {dateError ? 
+                    <p className="error-text">"لطفا تاریخ تولدتون را وارد کنید</p>:
+                    <></>
+                }
             </FormControl>
           </Box>
           <Box sx={style.buttonBox}>
