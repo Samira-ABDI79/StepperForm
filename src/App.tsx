@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import StepperForm from "./pages/StepperForm";
 
-import Layout from "./components/layout/layout";
+import Layout from "./layout/layout";
 import Home from "./pages/Home";
 import Validation from "./components/validation";
 
@@ -13,13 +13,12 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<StepperForm />} />
-        <Route path="/Validation" element={<Validation  />}/>
+          <Route path="/" element={<StepperForm />} />
+          <Route path="/Validation" element={<Validation />} />
 
-        <Route element={<Layout />}>
-        <Route path="/finish" element={<Home />} />
-
-         </Route>
+          <Route element={<Layout />}>
+            <Route path="/finish" element={<Home />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

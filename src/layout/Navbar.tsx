@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../store";
 
 const Search = styled("div")(() => ({
   borderRadius: "1.2rem",
@@ -42,9 +42,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
-  const firstName  = useSelector((state: RootState) => state.User.firstName)
-  const lastName  = useSelector((state: RootState) => state.User.lastName)
-  const image  = useSelector((state: RootState) => state.User.image)
+  const firstName = useSelector((state: RootState) => state.User.firstName);
+  const lastName = useSelector((state: RootState) => state.User.lastName);
+  const image = useSelector((state: RootState) => state.User.image);
 
   return (
     <AppBar
@@ -103,12 +103,9 @@ export default function Navbar() {
           </Search>
           <Stack direction="row" spacing={2} alignItems="center">
             <Typography sx={{ color: "#aaa" }} variant="h6">
-              Hi ,{firstName +" " + lastName}
+              Hi ,{firstName + " " + lastName}
             </Typography>
-            <Avatar
-              alt="Remy Sharp"
-              src={image}
-            />
+            <Avatar alt="Remy Sharp" src={image} />
           </Stack>
         </Stack>
       </Toolbar>

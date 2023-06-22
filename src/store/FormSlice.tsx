@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from ".";
 
 export interface FormState {
   firstName: string;
@@ -6,7 +7,7 @@ export interface FormState {
   city: string;
   image: any;
   date: any;
-  dateError:boolean;
+  dateError: boolean;
 }
 const initialState: FormState = {
   firstName: "",
@@ -14,28 +15,28 @@ const initialState: FormState = {
   city: "",
   image: "",
   date: "",
-  dateError:false,
+  dateError: false,
 };
 const FormSlice = createSlice({
-  name: "Form",
+  name: "form",
   initialState,
   reducers: {
-    interFirstName: (state, action) => {
+    enteredFirstName: (state, action) => {
       state.firstName = action.payload;
     },
-    interLastName: (state, action) => {
+    enteredLastName: (state, action) => {
       state.lastName = action.payload;
     },
-    interCity: (state, action) => {
+    enteredCity: (state, action) => {
       state.city = action.payload;
     },
-    interDate: (state, action) => {
+    enteredDate: (state, action) => {
       state.date = action.payload;
     },
-    interImage: (state, action) => {
+    enteredImage: (state, action) => {
       state.image = action.payload;
     },
-    
+
     setDateEror: (state, action) => {
       state.dateError = action.payload;
     },
@@ -43,12 +44,14 @@ const FormSlice = createSlice({
 });
 
 export const {
-  interFirstName,
-  interLastName,
-  interCity,
-  interImage,
-  interDate,
-  setDateEror
+  enteredFirstName,
+  enteredLastName,
+  enteredCity,
+  enteredImage,
+  enteredDate,
+  setDateEror,
 } = FormSlice.actions;
+
+export const userState = (state: RootState) => state.User;
 
 export default FormSlice.reducer;

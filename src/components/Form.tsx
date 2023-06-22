@@ -1,17 +1,16 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import {
-  interCity,
-  interFirstName,
-  interLastName,
-  interDate,
-  setDateEror
+  enteredCity,
+  enteredFirstName,
+  enteredLastName,
+  enteredDate,
+  setDateEror,
 } from "../store/FormSlice";
 import moment from "moment-jalaali";
 import { ostan } from "../data/inedex";
-import { schema } from "../schema";
+import { schema } from "../models/FoemDataSchema";
 import { Controller } from "react-hook-form";
-import type { RootState } from "../store/index";
+import { userState } from "../store/FormSlice";
 import {
   Typography,
   Box,
@@ -31,7 +30,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { NextButton } from "../components";
 import { CustomInput } from "./CustomInput";
 
-
 type FormData = {
   firstName: string;
   lastName: string;
@@ -45,9 +43,7 @@ interface Props {
 
 export default function Form({ handleFinish, handleNext }: Props) {
   const dispatch = useDispatch();
-  const { lastName, firstName, city,dateError,date } = useSelector(
-    (state: RootState) => state.User
-  );
+  const { lastName, firstName, city, dateError, date } = useSelector(userState);
   const {
     register,
     handleSubmit,
@@ -61,18 +57,16 @@ export default function Form({ handleFinish, handleNext }: Props) {
     },
     resolver: yupResolver(schema),
   });
-  const {  control } = useForm();
+  const { control } = useForm();
   const onSubmit = (formData: FormData) => {
-    dispatch(interFirstName(formData.firstName));
-    dispatch(interLastName(formData.lastName));
-    dispatch(interCity(formData.city));
-    if(date){
+    dispatch(enteredFirstName(formData.firstName));
+    dispatch(enteredLastName(formData.lastName));
+    dispatch(enteredCity(formData.city));
+    if (date) {
       handleNext();
-    dispatch(setDateEror(false));
-    }
-    else{
-    dispatch(setDateEror(true));
-
+      dispatch(setDateEror(false));
+    } else {
+      dispatch(setDateEror(true));
     }
   };
 
@@ -93,7 +87,7 @@ export default function Form({ handleFinish, handleNext }: Props) {
 
   const handleJalaliDateChange = (date: Date | null) => {
     const jalaliDate = moment(date).format("jYYYY/jMM/jDD");
-    dispatch(interDate(jalaliDate));
+    dispatch(enteredDate(jalaliDate));
   };
 
   return (
@@ -159,18 +153,15 @@ export default function Form({ handleFinish, handleNext }: Props) {
                   name="DatePicker"
                   control={control}
                   render={() => (
-                    <DatePicker
-                 
-                      onChange={handleJalaliDateChange}
-                    
-                    />
+                    <DatePicker onChange={handleJalaliDateChange} />
                   )}
                 />
               </LocalizationProvider>
-              {dateError ? 
-                    <p className="error-text">"لطفا تاریخ تولدتون را وارد کنید</p>:
-                    <></>
-                }
+              {dateError ? (
+                <p className="error-text">"لطفا تاریخ تولدتون را وارد کنید</p>
+              ) : (
+                <></>
+              )}
             </FormControl>
           </Box>
           <Box sx={style.buttonBox}>
