@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import SendIcon from "@mui/icons-material/Send";
 import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -60,7 +60,10 @@ export default function Sidebar() {
           <ListItemIcon sx={{ ml: "-1rem" }}>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText sx={{ ml: "6.3rem" }} primary="مشاهده محصولات" />
+          <NavLink to="/view-product">
+            {" "}
+            <ListItemText sx={{ ml: "6.3rem" }} primary="مشاهده محصولات" />
+          </NavLink>
         </ListItemButton>
       </List>
     </Box>

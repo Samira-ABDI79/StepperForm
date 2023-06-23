@@ -48,7 +48,7 @@ const ProductList: React.FC = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4}>
+          <Grid item key={product.id} xs={12} sm={6} md={2}>
             <Card className={classes.card}>
               <CardMedia
                 className={classes.cardMedia}
