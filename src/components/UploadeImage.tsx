@@ -16,17 +16,11 @@ interface Props {
   handleBack: () => void;
 }
 export default function UploadImage({ handleNext, handleBack }: Props) {
-  // const  image  = useSelector(
-  //   (state: RootState) => state.User.image
-  // );
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    // defaultValues: {
-    // photo
-    // },
     resolver: yupResolver(schema),
   });
 

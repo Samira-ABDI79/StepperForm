@@ -2,7 +2,6 @@ import * as React from "react";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import {
   Box,
   Container,
@@ -12,6 +11,9 @@ import {
   OutlinedInput,
   TextareaAutosize,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { createProduct } from "../store/ProductSlice";
 
 interface Product {
   name: string;
@@ -25,7 +27,8 @@ const AddProduct: React.FC = () => {
     price: 0,
     description: "",
   });
-
+  const products = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({
       ...product,
@@ -35,15 +38,7 @@ const AddProduct: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:3004/products",
-        product
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(createProduct(product));
   };
 
   return (

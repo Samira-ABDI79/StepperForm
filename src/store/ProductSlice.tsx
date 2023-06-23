@@ -1,9 +1,10 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { ProductState } from "./types";
+import axios from "axios";
+
 const initialState: ProductState = {
   products: [],
 };
-
-import { createSlice } from "@reduxjs/toolkit";
-import { ProductState } from "./types";
 
 const productSlice = createSlice({
   name: "products",
@@ -15,6 +16,21 @@ const productSlice = createSlice({
   },
 });
 
-export const { createProduct } = productSlice.actions;
+// export const { createProduct } = productSlice.actions;
+
+export function createProduct(product: any) {
+  return async function (dispatch: any) {
+    dispatch({ type: "products/createProduct", payload: product });
+    try {
+      const response = await axios.post(
+        "http://localhost:3004/products",
+        product
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
 
 export default productSlice;
