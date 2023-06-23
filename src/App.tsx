@@ -7,7 +7,7 @@ import AddProduct from "./pages/addProduct";
 import Layout from "./layout/layout";
 import Home from "./pages/Home";
 import Validation from "./components/validation";
-
+import ProductList from "./pages/viewProduct";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -19,6 +19,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/finish" element={<Home />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/view-product" element={<ProductList />} />
           </Route>
         </Routes>
       </BrowserRouter>
