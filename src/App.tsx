@@ -3,7 +3,7 @@ import { theme } from "./Theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 
 import StepperForm from "./pages/StepperForm";
-
+import AddProduct from "./pages/addProduct";
 import Layout from "./layout/layout";
 import Home from "./pages/Home";
 import Validation from "./components/validation";
@@ -18,6 +18,7 @@ export default function App() {
 
           <Route element={<Layout />}>
             <Route path="/finish" element={<Home />} />
+            <Route path="/add-product" element={<AddProduct />} />
           </Route>
         </Routes>
       </BrowserRouter>

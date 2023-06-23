@@ -10,6 +10,7 @@ declare module "@mui/material/styles/createPalette" {
 
 export const theme = createTheme(
   {
+    direction: "rtl",
     palette: {
       common: {
         KTHblue: "#007fae",

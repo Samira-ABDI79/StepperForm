@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "name": "سمیرا",
+      "price": "-3",
+      "description": "fg",
+      "id": 2
+    },
+    {
+      "name": "def",
+      "price": "-1",
+      "description": "fgsd",
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

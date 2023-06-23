@@ -51,22 +51,23 @@ export default function Navbar() {
       position="fixed"
       sx={{
         backgroundColor: "rgb(102,144,254)",
-        height: "4rem",
+        left: "4rem",
       }}
     >
       <Toolbar sx={{ display: "flex" }}>
         <Stack
           direction="row"
           alignItems="center"
-          spacing={0.5}
+          justifyContent="space-between"
+          spacing={3}
           sx={{
             backgroundColor: "rgb(30,34,255)",
             width: { lg: "14%" },
             boxSizing: "border-box",
             height: "100%",
             position: "absolute",
-            left: "0",
-            pl: "1rem",
+
+            right: "0",
           }}
         >
           <IconButton
@@ -81,7 +82,9 @@ export default function Navbar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              display: { xs: "none", sm: "block" },
+            }}
           >
             MUI
           </Typography>
@@ -91,19 +94,19 @@ export default function Navbar() {
           spacing={2}
           alignItems="center"
           justifyContent="space-between"
-          sx={{ ml: "22%", width: "100%" }}
+          sx={{ mr: "22%", width: "100%" }}
         >
           <Search>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="جستجو..."
               inputProps={{ "aria-label": "search" }}
             />
 
             <SearchIcon style={{ color: "#aaa" }} />
           </Search>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Typography sx={{ color: "#aaa" }} variant="h6">
-              Hi ,{firstName + " " + lastName}
+          <Stack direction="row" alignItems="center">
+            <Typography sx={{ color: "#aaa", m: "0 1rem" }} variant="h6">
+              {firstName + " " + lastName}
             </Typography>
             <Avatar alt="Remy Sharp" src={image} />
           </Stack>
