@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Vazir";
-  src: url("../src/assets/fonts/Vazir-Bold.woff") format("truetype");
+  src: url("../public/assets/fonts/Vazir-Bold.woff") format("truetype");
 }
 *{
   font-family: "Vazir" !important;
