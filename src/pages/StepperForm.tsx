@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Stepper, Step, StepLabel, Box } from "@mui/material";
 import { style } from "../Style/Form";
 import { UploadImage, Form, ViewInformation } from "../components";
-
+import { MyStep } from "../Style/Stepper";
 function StepperForm() {
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
@@ -19,15 +19,15 @@ function StepperForm() {
     <div className="StepperFormBackground">
       <Box sx={style.steperWrapper} dir="rtl">
         <Stepper activeStep={activeStep}>
-          <Step>
+          <MyStep>
             <StepLabel sx={style.StepLabel}>مرحله 1</StepLabel>
-          </Step>
-          <Step>
+          </MyStep>
+          <MyStep>
             <StepLabel sx={style.StepLabel}>مرحله 2</StepLabel>
-          </Step>
-          <Step>
+          </MyStep>
+          <MyStep>
             <StepLabel sx={style.StepLabel}>مرحله 3</StepLabel>
-          </Step>
+          </MyStep>
         </Stepper>
         {activeStep === 0 && (
           <Form handleFinish={handleFinish} handleNext={handleNext} />
