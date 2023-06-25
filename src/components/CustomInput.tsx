@@ -2,6 +2,9 @@ import TextField from "@material-ui/core/TextField";
 
 import { FormControl, FormLabel } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
+import { styled } from "@mui/material/styles";
+import { theme } from "../Theme/theme";
+import { LabelForm } from "../Style/Form";
 
 interface InputProps {
   error: any;
@@ -10,7 +13,9 @@ interface InputProps {
   label: string;
   name: string;
 }
-
+const MyTextField = styled(TextField)({
+  // backgroundColor: theme.palette.common.digitaGrey5,
+});
 export const CustomInput = ({
   error,
   message,
@@ -18,17 +23,17 @@ export const CustomInput = ({
   label,
   name,
 }: InputProps) => {
-  const {  control } = useForm();
+  const { control } = useForm();
 
   return (
     <div>
       <FormControl fullWidth style={{ marginBottom: "16px " }}>
-        <FormLabel style={{ margin: "16px 0" }}>{label}</FormLabel>
+        <LabelForm style={{ marginBottom: "16px " }}>{label}</LabelForm>
         <Controller
           name={name}
           control={control}
           render={() => (
-            <TextField
+            <MyTextField
               variant="outlined"
               fullWidth
               {...register}

@@ -7,26 +7,54 @@ declare module "@mui/material/styles/createPalette" {
     KTHblue: string;
   }
 }
+const myFont = {
+  fontFamily: "MyFont, sans-serif",
+};
+declare module "@mui/material/styles/createPalette" {
+  interface CommonColors {
+    gray: string;
+    gray1: string;
+  }
+}
 
 export const theme = createTheme(
   {
     direction: "rtl",
+    spacing: 4,
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
+
     palette: {
       common: {
-        KTHblue: "#007fae",
+        gray: "#9e9e9e",
+        gray1: "#696969",
       },
       primary: {
-        main: "#007fae",
+        light: "#757ce8",
+        main: "#3f50b5",
+        dark: "#002884",
+        contrastText: "#fff",
       },
       secondary: {
-        main: "#17a2b8",
+        light: "#ff7961",
+        main: "#f44336",
+        dark: "#ba000d",
+        contrastText: "#000",
       },
       error: {
         main: "#d4351c",
       },
     },
     typography: {
-      fontFamily: ["Arial", "sans-serif", "Vazirmatn"].join(","),
+      fontFamily: ["Vazir"].join(","),
+
       h1: {
         fontSize: 68,
       },
@@ -36,13 +64,30 @@ export const theme = createTheme(
       h4: {
         fontSize: 32,
       },
+      subtitle1: {
+        fontSize: 12,
+      },
+      body1: {
+        fontWeight: 500,
+      },
+      button: {
+        fontStyle: "italic",
+      },
     },
     components: {
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            fontFamily: ["Vazir"].join(","),
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {
             borderRadius: "0.25rem",
             borderColor: "#007fae",
+            fontFamily: ["Vazir"].join(","),
 
             color: "#fff",
 

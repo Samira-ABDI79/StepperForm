@@ -1,14 +1,35 @@
+import { styled } from "@mui/material/styles";
+import { Box, FormLabel } from "@mui/material";
+import { theme } from "../Theme/theme";
+
 const labelText = {
   color: "gray",
   paddingLeft: "2rem",
   width: "8rem",
   direction: "rtl",
 };
+export const LabelForm = styled(FormLabel)({
+  color: theme.palette.common.gray1,
+  fontSize: "15px",
+  fontWeigt: "400",
+  mb: "16px",
+
+  "& .MuiFormLabel-root": {
+    padding: "1rem 0",
+    fontWeight: "400",
+    lineHeight: "1",
+  },
+  "& .css-qe94m5-MuiFormLabel-root": {
+    fontWeight: "400",
+
+    padding: "0",
+  },
+});
 const FormLabelStyle = {
   color: "#696969",
   fontSize: "15px",
   fontWeigt: "400",
-  mb: "16px",
+  mb: "20px",
 };
 const formWrapper = {
   width: { lg: "30rem", sm: "90%" },
@@ -89,8 +110,7 @@ const prevButton = {
 };
 const stepStyle = {
   my: "1rem",
- 
-  
+
   fontSize: " 36px",
   lineHeight: "52px",
   fontWeight: "700",
@@ -122,3 +142,50 @@ export const style = {
   StepLabel,
   UploadBox,
 };
+// ************************************************************
+export const ImageWrapper = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up("sm")]: {
+    width: "100%",
+    height: "87%",
+  },
+  img: {
+    width: "100%",
+    height: "100%",
+    aspectRatio: "1",
+    objectFit: "cover",
+  },
+
+  "&.main": {
+    height: "calc(100vmin - 67px)",
+    maxHeight: "unset",
+    maxWidth: "unset",
+    [theme.breakpoints.up("sm")]: {
+      height: "89%",
+    },
+    "& .MuiSvgIcon-root": {
+      top: "10px",
+      right: "6px",
+      padding: "12px",
+      fontSize: "30px",
+    },
+  },
+  input: {
+    visibility: "hidden",
+    position: "absolute",
+    width: "100%",
+  },
+  "& .MuiSvgIcon-root": {
+    [theme.breakpoints.up("sm")]: {
+      top: "5px",
+      padding: "6px",
+    },
+    [theme.breakpoints.up("md")]: {
+      padding: "4px",
+      fontSize: "18px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      padding: "8px",
+      fontSize: "22px",
+    },
+  },
+}));

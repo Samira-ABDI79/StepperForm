@@ -3,13 +3,11 @@
   src: url("../public/assets/fonts/Vazir-Bold.woff") format("truetype");
 }
 *{
-  font-family: "Vazir" !important;
+font-family: "Vazir" !important;
 
 }
 body {
-  font-family: "Vazir" !important;
- 
-  font-family: 'CustomFont', Arial, sans-serif;
+
   margin:0;
   padding: 0;
  

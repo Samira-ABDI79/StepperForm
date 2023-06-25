@@ -25,7 +25,7 @@ import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { style } from "../Style/Form";
+import { LabelForm, style } from "../Style/Form";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { NextButton } from "../components";
 import { CustomInput } from "./CustomInput";
@@ -80,8 +80,6 @@ export default function Form({ handleFinish, handleNext }: Props) {
       },
     },
   };
-  // const [selectedDate, handleDateChange] = useState<Date | null>(null);
-  //   const [selectedItem, setSelectedItem] = useState<Date | null>(null);
 
   // تبدیل تاریخ میلادی به شمسی
 
@@ -118,12 +116,13 @@ export default function Form({ handleFinish, handleNext }: Props) {
               register={register("lastName")}
             />
             <FormControl fullWidth style={{ marginBottom: "16px " }}>
-              <FormLabel sx={style.FormLabelStyle}>استان محل سکونت</FormLabel>
+              <LabelForm>استان محل سکونت</LabelForm>
               <Box>
                 <FormControl
                   variant="outlined"
                   fullWidth
                   error={Boolean(errors.city)}
+                  sx={{ mt: "1rem" }}
                 >
                   <Select
                     MenuProps={MenuProps}
