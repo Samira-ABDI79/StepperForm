@@ -2,11 +2,11 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
+
 import { Box } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-
+import GradingIcon from '@mui/icons-material/Grading';
+import AddCardIcon from '@mui/icons-material/AddCard';
 export default function Sidebar() {
   return (
     <Box
@@ -26,7 +26,7 @@ export default function Sidebar() {
         disablePadding={true}
         sx={{
           mt: "-4rem",
-          // border: "1px solid red",
+          padding:"0 0.5rem",
         }}
         component="nav"
         aria-labelledby="nested-list-subheader"
@@ -36,34 +36,39 @@ export default function Sidebar() {
             display: "flex",
             my: "0.5rem",
 
-            flexDirection: "row-reverse",
+            flexDirection: "row",
+            justifyContent:"space-between",
             padding: "0",
           }}
         >
-          <Link to="/add-product">
+            <Link to="/add-product" style={{textDecoration:"none",color:"inherit" ,padding:"0",margin:"0",}} >
             {" "}
-            <ListItemIcon sx={{ ml: "-1rem" }}>
-              <SendIcon />
-            </ListItemIcon>
-            <ListItemText sx={{ ml: "5rem" }} primary="اضافه کردن محصولات" />
+         
+            <ListItemText sx={{ }} primary="اضافه کردن محصولات" />
           </Link>
+             <ListItemIcon sx={{ ml: "-1rem" }}>
+              <AddCardIcon />
+            </ListItemIcon>
+        
         </ListItemButton>
         <ListItemButton
           sx={{
             display: "flex",
             my: "0.5rem",
+            justifyContent:"space-between",
 
-            flexDirection: "row-reverse",
+            flexDirection: "row",
             padding: "0",
           }}
         >
-          <ListItemIcon sx={{ ml: "-1rem" }}>
-            <DraftsIcon />
-          </ListItemIcon>
-          <NavLink to="/view-product">
+            <NavLink to="/view-product" style={{textDecoration:"none",color:"inherit" ,padding:"0",margin:"0",}} >
             {" "}
-            <ListItemText sx={{ ml: "6.3rem" }} primary="مشاهده محصولات" />
+            <ListItemText sx={{  }} primary="مشاهده محصولات" />
           </NavLink>
+          <ListItemIcon sx={{ ml: "-1rem" }}>
+            <GradingIcon />
+          </ListItemIcon>
+        
         </ListItemButton>
       </List>
     </Box>

@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { Box } from "@mui/material";
 
 function Layout() {
   return (
@@ -9,9 +8,7 @@ function Layout() {
       <Navbar />
       <Sidebar />
 
-      <Box sx={{ margin: "10rem" }}>
-        <Outlet />
-      </Box>
+      <Outlet />
     </>
   );
 }

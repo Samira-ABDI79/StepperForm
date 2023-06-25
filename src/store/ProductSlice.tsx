@@ -19,7 +19,7 @@ const productSlice = createSlice({
 // export const { createProduct } = productSlice.actions;
 
 export function createProduct(product: any) {
-  return async function (dispatch: any) {
+  return async (dispatch: any) => {
     dispatch({ type: "products/createProduct", payload: product });
     try {
       const response = await axios.post(
