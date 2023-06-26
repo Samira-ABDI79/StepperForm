@@ -10,6 +10,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { setSidebarShow } from "../store/LayoutSlice";
+import { useDispatch } from "react-redux";
 
 const Search = styled("div")(() => ({
   borderRadius: "1.2rem",
@@ -46,6 +48,15 @@ export default function Navbar() {
   const lastName = useSelector((state: RootState) => state.User.lastName);
   const image = useSelector((state: RootState) => state.User.image);
 
+  const dispatch = useDispatch();
+
+  const SidebarShow = useSelector(
+    (state: RootState) => state.Layout.SidebarShow
+  );
+  const showHandle = () => {
+    dispatch(setSidebarShow(!SidebarShow));
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -75,6 +86,7 @@ export default function Navbar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={showHandle}
           >
             <MenuIcon />
           </IconButton>
