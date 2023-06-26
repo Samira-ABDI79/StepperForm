@@ -26,7 +26,6 @@ export function createProduct(product: any) {
         "http://localhost:3004/products",
         product
       );
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

@@ -2,13 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Container, FormControl, Grid, FormLabel } from "@mui/material";
+import {
+  Container,
+  FormControl,
+  Grid,
+  FormLabel,
+  IconButton,
+  Snackbar,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 // import {useSelector } from "react-redux"
 // import { RootState } from "../store";
 import { createProduct } from "../store/ProductSlice";
 import { FormWrapper } from "../Style/Form";
-
+import CloseIcon from "@mui/icons-material/Close";
 interface Product {
   name: string;
   price: number;
@@ -36,6 +43,36 @@ const AddProduct: React.FC = () => {
     dispatch(newLocal);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+        sx={{ marginRight: "8rem" }}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
   return (
     <>
       <Container
@@ -94,7 +131,7 @@ const AddProduct: React.FC = () => {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <Button type="submit" variant="contained">
+                <Button type="submit" variant="contained" onClick={handleClick}>
                   ثبت
                 </Button>
               </Grid>
@@ -102,6 +139,14 @@ const AddProduct: React.FC = () => {
           </form>
         </FormWrapper>
       </Container>
+      <Snackbar
+        sx={{ backgroundColor: "green" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="محصول با موفقیت اضافه شد"
+        action={action}
+      />
     </>
   );
 };

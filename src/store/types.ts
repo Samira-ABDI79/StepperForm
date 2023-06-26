@@ -6,6 +6,7 @@ export interface Product {
 
 export interface ProductState {
   products: Product[];
+
 }
 
 export type ProductAction =

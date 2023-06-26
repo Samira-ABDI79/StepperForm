@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/styles";
 import axios from "axios";
+import { Container } from "@mui/material";
 
 interface Product {
   id: number;
@@ -45,30 +46,41 @@ const ProductList: React.FC = () => {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
+    <Container
+      sx={{
+        py: "10rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+
+        marginRight: "15rem",
+      }}
+    >
+      <Grid container spacing={4} justifyContent="end">
         {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={2}>
+          <Grid item key={product.id} xs={12} sm={6} md={2} lg={4}>
             <Card className={classes.card}>
-              <CardMedia
-                className={classes.cardMedia}
-                image={product.image}
-                title={product.name}
-              />
+              <img src={product.image} />
+
               <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {product.name}
                 </Typography>
                 <Typography>{product.description}</Typography>
               </CardContent>
-              <Typography variant="h6" component="h3" align="center">
+              <Typography
+                variant="h6"
+                component="h3"
+                align="center"
+                sx={{ color: "red", fontWeight: "700" }}
+              >
                 {product.price} $
               </Typography>
             </Card>
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </Container>
   );
 };
 

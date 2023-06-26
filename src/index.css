@@ -9,8 +9,10 @@ font-family: "Vazir" !important;
 body {
   margin:0;
   padding: 0;
-  background-image: url("../public//images/image1\ \(3\).avif");
-  background-repeat: no-repeat;
+  background-image: url("../public//images/image1\ \(5\).avif");
+  background-repeat: repeat-y;
+ 
+
   background-size: cover;
 
   background-position: center;
