@@ -18,7 +18,6 @@ export default function Sidebar() {
   const SidebarShow = useSelector(
     (state: RootState) => state.Layout.SidebarShow
   );
-
   return (
     <>
       {SidebarShow ? (
