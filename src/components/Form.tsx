@@ -7,7 +7,7 @@ import {
   setDateEror,
 } from "../store/FormSlice";
 import moment from "moment-jalaali";
-import { ostan, top100Films } from "../data/inedex";
+import { ostan } from "../data/inedex";
 import { schema } from "../models/FoemDataSchema";
 import { Controller } from "react-hook-form";
 import { userState } from "../store/FormSlice";
@@ -17,8 +17,6 @@ import {
   Container,
   FormControl,
   FormLabel,
-  MenuItem,
-  Select,
   Autocomplete,
   TextField,
 } from "@mui/material";
@@ -90,6 +88,20 @@ export default function Form({ handleFinish, handleNext }: Props) {
     dispatch(enteredDate(jalaliDate));
   };
   console.log(city, "city");
+
+  class Adapter extends AdapterDateFnsJalali {
+    getWeekdays = () => {
+      return [
+        "شنبه",
+        "یکشنبه",
+        "دوشنبه",
+        "سهشنبه",
+        "چهارشنبه",
+        "پنجشنبه",
+        "جمعه",
+      ];
+    };
+  }
   return (
     <form className="marginBottom" onSubmit={handleSubmit(onSubmit)}>
       <Container>
@@ -144,12 +156,15 @@ export default function Form({ handleFinish, handleNext }: Props) {
 
             <FormControl fullWidth sx={{ mt: "1.5rem" }} dir="rtl">
               <FormLabel sx={style.FormLabelStyle}>تایخ تولد</FormLabel>
-              <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+              <LocalizationProvider dateAdapter={Adapter}>
                 <Controller
                   name="DatePicker"
                   control={control}
                   render={() => (
-                    <DatePicker onChange={handleJalaliDateChange} />
+                    <DatePicker
+                      onChange={handleJalaliDateChange}
+                      views={["year", "month", "day"]}
+                    />
                   )}
                 />
               </LocalizationProvider>
