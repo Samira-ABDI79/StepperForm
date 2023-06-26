@@ -1,149 +1,144 @@
-import * as React from "react";
-import { useState } from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import {
+  TextField,
+  Button,
+  Box,
   Container,
   FormControl,
-  Grid,
   FormLabel,
-  IconButton,
+  Grid,
   Snackbar,
-  Stack,
-  Typography,
-} from "@mui/material";
+} from "@material-ui/core";
+
+import FileUpload from "../components/FileUpload";
+
+import { useState } from "react";
+
 import { useDispatch } from "react-redux";
 // import {useSelector } from "react-redux"
 // import { RootState } from "../store";
 import { createProduct } from "../store/ProductSlice";
 import { FormWrapper } from "../Style/Form";
 import CloseIcon from "@mui/icons-material/Close";
-import FileUpload from "../components/FileUpload";
-interface Product {
-  name: string;
+
+type FormValues = {
+  productName: string;
   price: number;
   description: string;
-}
+};
 
-const AddProduct: React.FC = () => {
-  const [product, setProduct] = useState<Product>({
-    name: "",
+const schema = yup.object().shape({
+  productName: yup
+    .string()
+    .required("لطفا نام محصول را وارد کنید")
+    .matches(/^[a-zA-Z\s]*$/, "فقط حروف الفبا و فاصله مجاز هستند"),
+  price: yup
+    .number()
+    .required("قیمت باید از نوع «عدد» باشد، اما مقدار نهایی این بود: «NaN»."),
+  description: yup
+    .string()
+    .required("لطفا توضیحات مربوط به محصول را وارد کنید ")
+    .matches(/^[a-zA-Z\s]*$/, "فقط حروف الفبا و فاصله مجاز هستند"),
+});
+
+function AddProduct() {
+  const [product, setProduct] = useState<FormValues>({
+    productName: "",
     price: 0,
     description: "",
   });
-  // const products = useSelector((state: RootState) => state.products);
-  const dispatch = useDispatch();
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     setProduct({
       ...product,
-      [event.target.name]: event.target.value,
+      productName: data.productName,
     });
+    createProduct(product);
+    console.log(data, "data");
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const newLocal = createProduct(product);
-    dispatch(newLocal);
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-        sx={{ marginRight: "8rem" }}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
   return (
     <>
       <Container
-        sx={{
-          mt: "10rem",
+        style={{
+          marginTop: "10rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          marginRight: "15rem",
+          padding: "0 15rem",
         }}
       >
         <FormWrapper>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <FormControl fullWidth variant="outlined">
-                  <FormLabel sx={{ mb: "0.5rem" }} htmlFor="name-input">
-                    نام محصول
-                  </FormLabel>
+                  <FormLabel htmlFor="name-input">نام محصول</FormLabel>
                   <TextField
-                    name="name"
-                    value={product.name}
-                    onChange={handleChange}
                     margin="normal"
-                    required
+                    variant="outlined"
+                    fullWidth
+                    {...register("productName")}
+                    error={!!errors.productName}
+                    helperText={errors.productName?.message}
                   />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth variant="outlined">
-                  <FormLabel sx={{ mb: "0.5rem" }} htmlFor="price-input">
-                    قیمت محصول
-                  </FormLabel>
+                  <FormLabel htmlFor="price-input">قیمت محصول</FormLabel>
                   <TextField
-                    name="price"
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
                     type="number"
-                    value={product.price}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
+                    {...register("price")}
+                    error={!!errors.price}
+                    // helperText={errors.price?.message}
                   />
+                  {!!errors.price && (
+                    <p className="error-text">
+                      قیمت باید از نوع «عدد» باشد، اما مقدار نهایی این بود:
+                      «NaN».
+                    </p>
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth variant="outlined">
-                  <FormLabel sx={{ mb: "0.5rem" }} htmlFor="name-input">
-                    عکس محصول
-                  </FormLabel>
+                  <FormLabel htmlFor="name-input">عکس محصول</FormLabel>
 
                   <FileUpload limit={1} multiple={false} name="image" />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <FormLabel sx={{ mb: "0.5rem" }} htmlFor="description-input">
-                    توضیحات
-                  </FormLabel>
+                  <FormLabel htmlFor="description-input">توضیحات</FormLabel>
                   <TextField
-                    name="description"
-                    value={product.description}
-                    onChange={handleChange}
                     margin="normal"
+                    variant="outlined"
+                    fullWidth
                     multiline
-                    required
+                    rows={4}
+                    {...register("description")}
+                    error={!!errors.description}
+                    helperText={errors.description?.message}
                   />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <Button type="submit" variant="contained" onClick={handleClick}>
+                <Button type="submit" variant="contained">
                   ثبت
                 </Button>
               </Grid>
@@ -151,16 +146,10 @@ const AddProduct: React.FC = () => {
           </form>
         </FormWrapper>
       </Container>
-      <Snackbar
-        sx={{ backgroundColor: "green" }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="محصول با موفقیت اضافه شد"
-        action={action}
-      />
     </>
   );
-};
-
+}
 export default AddProduct;
+function dispatch(newLocal: (dispatch: any) => Promise<void>) {
+  throw new Error("Function not implemented.");
+}

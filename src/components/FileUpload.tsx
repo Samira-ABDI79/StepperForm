@@ -45,7 +45,9 @@ const FileUpload: React.FC<IFileUploadProps> = ({ limit, multiple, name }) => {
         >
           <Stack justifyContent="center" sx={{ p: 1, textAlign: "center" }}>
             <Typography sx={{ color: "#ccc" }}>
-              {limit > 1 ? "Browse files to upload" : "Browse file to upload"}
+              {limit > 1
+                ? "برای آپلود فایل ها را مرور کنید"
+                : "برای آپلود فایل را مرور کنید"}
             </Typography>
             <div>
               <img
@@ -55,7 +57,7 @@ const FileUpload: React.FC<IFileUploadProps> = ({ limit, multiple, name }) => {
               />
             </div>
             <Typography variant="body1" component="span">
-              <strong>Supported Files</strong>
+              <strong>فایل های پشتیبانی شده</strong>
             </Typography>
             <Typography variant="body2" component="span">
               JPG, JPEG, PNG
