@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 // import {useSelector } from "react-redux"
 // import { RootState } from "../store";
 import { createProduct } from "../store/ProductSlice";
+import { FormWrapper } from "../Style/Form";
 
 interface Product {
   name: string;
@@ -37,15 +38,15 @@ const AddProduct: React.FC = () => {
 
   return (
     <>
-      <div className="background">
-        <Container
-          sx={{
-            mt: "5rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      <Container
+        sx={{
+          mt: "10rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <FormWrapper>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -99,8 +100,8 @@ const AddProduct: React.FC = () => {
               </Grid>
             </Grid>
           </form>
-        </Container>
-      </div>
+        </FormWrapper>
+      </Container>
     </>
   );
 };

@@ -8,6 +8,12 @@ const labelText = {
   width: "8rem",
   direction: "rtl",
 };
+export const FormWrapper = styled(Box)({
+  padding: "2rem",
+  borderRadius: "1rem",
+  backgroundColor: "hsl(0, 0%, 100%)",
+  border: "4px solid hsl(0, 0%, 90%)",
+});
 export const LabelForm = styled(FormLabel)({
   color: theme.palette.common.gray1,
   fontSize: "15px",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Stepper, Step, StepLabel, Box } from "@mui/material";
+import { Stepper, StepLabel, Box } from "@mui/material";
 import { style } from "../Style/Form";
 import { UploadImage, Form, ViewInformation } from "../components";
 import { MyStep } from "../Style/Stepper";

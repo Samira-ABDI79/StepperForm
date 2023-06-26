@@ -2,18 +2,16 @@ import { createTheme } from "@mui/material/styles";
 import "@mui/material/styles/createPalette";
 import { faIR } from "@mui/x-date-pickers/locales";
 
-declare module "@mui/material/styles/createPalette" {
-  interface CommonColors {
-    KTHblue: string;
-  }
-}
-const myFont = {
-  fontFamily: "MyFont, sans-serif",
-};
+// const myFont = {
+//   fontFamily: "MyFont, sans-serif",
+// };
 declare module "@mui/material/styles/createPalette" {
   interface CommonColors {
     gray: string;
     gray1: string;
+    white: string;
+    pink: string;
+    blue: string;
   }
 }
 
@@ -35,6 +33,9 @@ export const theme = createTheme(
       common: {
         gray: "#9e9e9e",
         gray1: "#696969",
+        white: "#fff",
+        pink: "#ff00ff",
+        blue: "#0000ff",
       },
       primary: {
         light: "#757ce8",
