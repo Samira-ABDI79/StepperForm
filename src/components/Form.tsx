@@ -7,7 +7,7 @@ import {
   setDateEror,
 } from "../store/FormSlice";
 import moment from "moment-jalaali";
-import { ostan } from "../data/inedex";
+import { ostan, top100Films } from "../data/inedex";
 import { schema } from "../models/FoemDataSchema";
 import { Controller } from "react-hook-form";
 import { userState } from "../store/FormSlice";
@@ -19,6 +19,8 @@ import {
   FormLabel,
   MenuItem,
   Select,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 
 import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
@@ -87,7 +89,7 @@ export default function Form({ handleFinish, handleNext }: Props) {
     const jalaliDate = moment(date).format("jYYYY/jMM/jDD");
     dispatch(enteredDate(jalaliDate));
   };
-
+  console.log(city, "city");
   return (
     <form className="marginBottom" onSubmit={handleSubmit(onSubmit)}>
       <Container>
@@ -124,20 +126,15 @@ export default function Form({ handleFinish, handleNext }: Props) {
                   error={Boolean(errors.city)}
                   sx={{ mt: "1rem" }}
                 >
-                  <Select
-                    MenuProps={MenuProps}
-                    labelId="select-label"
-                    defaultValue={city}
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
                     {...register("city")}
+                    options={ostan}
+                    sx={{ width: "100%" }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
 
-                    // defaultValue={city}
-                  >
-                    {ostan.map((item) => (
-                      <MenuItem key={item.value} value={item.value}>
-                        {item.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
                   {errors.city && (
                     <p className="error-text">{errors.city.message}</p>
                   )}
