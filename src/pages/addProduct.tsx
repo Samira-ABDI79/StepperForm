@@ -9,6 +9,8 @@ import {
   FormLabel,
   IconButton,
   Snackbar,
+  Stack,
+  Typography,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 // import {useSelector } from "react-redux"
@@ -16,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { createProduct } from "../store/ProductSlice";
 import { FormWrapper } from "../Style/Form";
 import CloseIcon from "@mui/icons-material/Close";
+import FileUpload from "../components/FileUpload";
 interface Product {
   name: string;
   price: number;
@@ -113,6 +116,15 @@ const AddProduct: React.FC = () => {
                     margin="normal"
                     required
                   />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth variant="outlined">
+                  <FormLabel sx={{ mb: "0.5rem" }} htmlFor="name-input">
+                    عکس محصول
+                  </FormLabel>
+
+                  <FileUpload limit={1} multiple={false} name="image" />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>

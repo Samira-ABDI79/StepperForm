@@ -8,6 +8,7 @@ import Layout from "./layout/layout";
 import Home from "./pages/Home";
 import Validation from "./components/validation";
 import ProductList from "./pages/viewProduct";
+import ProductForm from "./pages/ProductForm";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -15,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<StepperForm />} />
           <Route path="/Validation" element={<Validation />} />
+          <Route path="/product" element={<ProductForm />} />
 
           <Route element={<Layout />}>
             <Route path="/finish" element={<Home />} />
